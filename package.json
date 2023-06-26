@@ -1,0 +1,24 @@
+{
+  "name": "standards-experimental",
+  "version": "1.0.0",
+  "description": "Build process for experimental standards",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "docs": "markdown-folder-to-html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConsumerDataStandardsAustralia/standards-experimental.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues"
+  },
+  "homepage": "https://github.com/ConsumerDataStandardsAustralia/standards-experimental#readme",
+  "devDependencies": {
+    "markdown-folder-to-html": "^2.4.0"
+  }
+}

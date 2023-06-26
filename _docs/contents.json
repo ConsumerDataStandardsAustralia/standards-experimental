@@ -1,0 +1,17 @@
+{
+  "paths": [
+    {
+      "type": "file",
+      "value": "index.md"
+    }
+  ],
+  "contents": [
+    {
+      "path": "index.md",
+      "url": "index.html",
+      "content": "# Experimental Standards\n\nPlaceholder content for experimental standards\n",
+      "html": "<h1 id=\"experimental-standards\">Experimental Standards <a class=\"heading-anchor-permalink\" href=\"#experimental-standards\">#</a></h1>\n<p>Placeholder content for experimental standards</p>\n",
+      "id": 0
+    }
+  ]
+}
