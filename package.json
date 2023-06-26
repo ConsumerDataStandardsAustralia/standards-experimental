@@ -5,6 +5,7 @@
   "directories": {
     "doc": "docs"
   },
+  
   "scripts": {
     "docs": "markdown-folder-to-html"
   },
