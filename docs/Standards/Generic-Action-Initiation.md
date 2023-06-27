@@ -29,7 +29,7 @@ It is intended that the feedback obtained from the publication of this standard 
 
 ## Standard
 
-### Design principles
+### Design Assumptions
 
 #### General
 
