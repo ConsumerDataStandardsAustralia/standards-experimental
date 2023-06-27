@@ -21,14 +21,3 @@ Contributions are welcome to these standards and can be provided via the
 [GitHub repository](https://github.com/ConsumerDataStandardsAustralia/standards-experimental)
 holding these standards.  The README for this repository outlines the process
 for contribution and moderation of these standards.
-
-# Current Standards
-
-## Generic Action Initiation Standard v1.0.0
-
-*Standard:* [Generic Action Initiation](./generic-ai)<br/>
-*Current Version:* v1.0.0<br/>
-*Description:*<br/>
-This standard contains variations and extensions to the information security
-profile and high level standards in the binding consumer data standards to
-facilitate the addition of action initiation.
