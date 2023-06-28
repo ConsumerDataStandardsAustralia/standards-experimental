@@ -20,14 +20,22 @@ This standard has been developed by the Data Standards Body as a strawman soluti
 
 It is intended that the feedback obtained from the publication of this standard will inform the eventual development of a draft data standard of the consumer data standards.
 
-## Glossary
+## Introduction
+
+<Introduction>
+
+### Requirements Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 [[RFC2119](#normative-rfc2119)] [[RFC8174](#normative-rfc8174)].
+
+### Terminology
 
 | Term | Definition |
 |-|-|
 | Accredited Action Initiator (AAI) | A software product that is accredited to initiate actions under CDR.  The equivalent of an Accredited Data Recipient under the current CDR regime |
 | Action Service Provider (ASP) | A server implementation that supports the receipt of an action instruction from an AAI.  The equivalent of a Data Holder under the current CDR regime |
 
-## Standard
+## Specification
 
 ### Design Assumptions
 
@@ -81,6 +89,14 @@ It is intended that the feedback obtained from the publication of this standard 
 The following table contains references to normative standards that this standard relies upon:
 | Reference | Description |
 |-|-|
+| RFC2119 <a id="normative-rfc2119"/> | Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997, https://www.rfc-editor.org/info/rfc2119. |
+| RFC8174 <a id="normative-rfc8174"/> | Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017, https://www.rfc-editor.org/info/rfc8174. |
 | CDS <a id="normative-cds"/> | The latest version of the binding consumer data standards at https://consumerdatastandardsaustralia.github.io/standards/ |
 | CDRRA <a id="normative-cdrra"/> | The experimental [CDR Rich Authorisation](./CDR-Rich-Authorisation.html) standard |
 | CAPDISC <a id="normative-capdisc"/> | The experimental [Capability Discovery](./Capability-Discovery.html) standard |
+
+## Informative References
+
+| Reference | Description |
+|-|-|
+| | |
