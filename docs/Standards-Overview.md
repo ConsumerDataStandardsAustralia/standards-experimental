@@ -30,3 +30,11 @@ Additional endpoints, and extensions to existing endpoints, to facilitate the re
 *Description:*<br/>
 Standalone standard for generic discovery mechanism for an online service to
 communicate capabilities.
+
+# 
+
+*Standard:* [Superannuation Product Standards](./Standards/Super-Product.html)<br/>
+*Current Version:* 0.0.1<br/>
+*Description:*<br/>
+Product API's proposal for Superannuation sector
+
