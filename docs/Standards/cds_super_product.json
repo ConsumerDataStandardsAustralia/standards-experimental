@@ -484,7 +484,7 @@
             "x-cds-type": "URIString"
           },
           "providerUri": {
-            "description": "A link to the fund providers we page",
+            "description": "A link to the fund providers web page",
             "type": "string",
             "x-cds-type": "URIString"
           },
