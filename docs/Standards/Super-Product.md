@@ -22,7 +22,7 @@ The product API contains two API's
 
 ## Specification
 
-The experimental standards are published [here](./cds_super_product.json)
+The experimental standards are published below:
 
 | Reference | Link |
 |-|-|

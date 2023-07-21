@@ -1,0 +1,687 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "contact": {
+      "email": "contact@consumerdatastandards.gov.au",
+      "name": "Consumer Data Standards",
+      "url": "https://consumerdatastandards.gov.au"
+    },
+    "description": "Consumer Data Standards APIs created by the Data Standards Body (DSB), with the Data Standards Chair as the decision maker to meet the needs of the Consumer Data Right",
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "title": "CDR Experimantal Superannuation API",
+    "version": "0.0.1"
+  },
+  "servers": [ {
+    "url": "https://data.holder.com.au/cds-au/v1"
+  } ],
+  "paths": {
+    "/super/products": {
+      "get": {
+        "description": "Obtain a list of superannuations products that are currently offered to the market.\n\nNote that the results returned by this end point are expected to be ordered in descending order according to `lastUpdated`.",
+        "operationId": "listProducts",
+        "parameters": [ {
+          "name": "investmentType",
+          "description": "Used to filter results on the investment type field. Any one of the valid values for this field can be supplied. If absent, defaults to include ALL products.",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [ "CONSERVATIVE", "BALANCED", "GROWTH", "ETHICAL", "FIXED_INCOME", "OTHER", "ALL" ],
+            "default": "ALL",
+            "type": "string"
+          }
+        }, {
+          "name": "effective",
+          "description": "Allows for the filtering of productd based on whether the current time is within the period of time defined as effective by the effectiveFrom and effectiveTo fields. Valid values are ‘CURRENT’, ‘FUTURE’ and ‘ALL’. If absent defaults to 'CURRENT'",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "default": "CURRENT",
+            "enum": [ "CURRENT", "FUTURE", "ALL" ],
+            "type": "string"
+          }
+        }, {
+          "name": "updated-since",
+          "description": "Only include products that have been updated after the specified date and time.  If absent defaults to include all plans",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "x-cds-type": "DateTimeString"
+        }, {
+            "$ref": "#/components/parameters/page"
+        }, {
+            "$ref": "#/components/parameters/page-size"
+        }, {
+            "$ref": "#/components/parameters/x-v"
+        }, {
+            "$ref": "#/components/parameters/x-min-v"
+        } ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuperFundProductListResponse"
+                }
+              }
+            },
+            "description": "Successful response",
+            "headers": {
+              "x-v": {
+                "$ref": "#/components/headers/x-v"
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorListV2"
+                }
+              }
+            },
+            "description": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Field](#error-400-field-missing)</li><li>[400 - Invalid Page Size](#error-400-field-invalid-page-size)</li><li>[400 - Invalid Version](#error-400-header-invalid-version)</li></ul>"
+          },
+          "406": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorListV2"
+                }
+              }
+            },
+            "description": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorListV2"
+                }
+              }
+            },
+            "description": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[422 - Invalid Page](#error-422-field-invalid-page)</li></ul>"
+          }
+        },
+        "summary": "Get Superannuation Products",
+        "tags": [ "Super", "Products" ],
+        "x-version": "1"
+      }
+    },
+    "/super/products/{productId}": {
+      "get": {
+        "description": "Obtain detailed information on a single super product offered openly to the market",
+        "operationId": "getProduct",
+        "parameters": [ {
+          "name": "productId",
+          "description": "ID of the specific product requested",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }, {
+            "$ref": "#/components/parameters/x-v"
+        }, {
+            "$ref": "#/components/parameters/x-min-v"
+        }	],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuperFundProductResponse"
+                }
+              }
+            },
+            "description": "Successful response",
+            "headers": {
+              "x-v": {
+                "$ref": "#/components/headers/x-v"
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorListV2"
+                }
+              }
+            },
+            "description": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Field](#error-400-field-missing)</li><li>[400 - Invalid Version](#error-400-header-invalid-version)</li></ul>"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorListV2"
+                }
+              }
+            },
+            "description": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[404 - Invalid Resource](#error-404-resource-invalid)</li></ul>",
+            "headers": {}
+          },
+          "406": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorListV2"
+                }
+              }
+            },
+            "description": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>"
+          }
+        },
+        "summary": "Get Superannuation Product Detail",
+        "tags": [ "Super", "Products" ],
+        "x-version": "1"
+      }
+    }
+  },
+  "components": {
+    "headers": {
+      "x-v": {
+        "schema": {
+          "description": "The [version](#response-headers) of the API end point that the data holder has responded with.",
+          "type": "string"
+        }
+      }
+    },
+    "parameters": {
+      "fundId": {
+        "name": "serviceId",
+        "description": "ID of the specific service requested. E.g. a mobile [MSISDN](https://www.etsi.org/deliver/etsi_gts/03/0303/05.00.00_60/gsmts_0303v050000p.pdf), [FNN](https://www.nbnco.com.au/content/dam/nbnco2/documents/sfaa-wba2-dictionary_FTTN-launch.pdf) or internet service e.g [NBN AVC Service ID](https://www.nbnco.com.au/content/dam/nbnco2/documents/sfaa-wba2-dictionary_FTTN-launch.pdf). This is a tokenised ID returned from the account. In accordance with [CDR ID permanence](#id-permanence) requirements",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "open-status": {
+        "name": "open-status",
+        "description": "Used to filter results according to open/closed status. Values can be OPEN, CLOSED or ALL. If absent then ALL is assumed",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "default": "ALL",
+          "enum": [ "ALL", "CLOSED", "OPEN" ],
+          "type": "string"
+        }
+      },
+      "newest-time": {
+        "name": "newest-time",
+        "description": "Constrain the request to records with effective time at or before this date/time.  If absent defaults to current date/time.  Format is aligned to DateTimeString common type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "x-cds-type": "DateTimeString"
+      },
+      "oldest-time": {
+        "name": "oldest-time",
+        "description": "Constrain the request to records with effective time at or after this date/time. If absent defaults to newest-time minus 12 months.  Format is aligned to DateTimeString common type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "x-cds-type": "DateTimeString"
+      },
+      "newest-date": {
+        "name": "newest-date",
+        "description": "Constrain the request to records with effective date at or before this date.  If absent defaults to current date.  Format is aligned to DateString common type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "x-cds-type": "DateString"
+      },
+      "oldest-date": {
+        "name": "oldest-date",
+        "description": "Constrain the request to records with effective date at or after this date. If absent defaults to newest-date minus 24 months.  Format is aligned to DateString common type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "x-cds-type": "DateString"
+      },
+      "page": {
+        "name": "page",
+        "description": "Page of results to request (standard pagination)",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        },
+        "x-cds-type": "PositiveInteger"
+      },
+      "page-size": {
+        "name": "page-size",
+        "description": "Page size to request.  Default is 25 (standard pagination)",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        },
+        "x-cds-type": "PositiveInteger"
+      },
+      "x-v": {
+        "name": "x-v",
+        "description": "Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "x-min-v": {
+        "name": "x-min-v",
+        "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "x-cds-client-headers": {
+        "name": "x-cds-client-headers",
+        "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls.  Not required for unattended or unauthenticated calls.",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "x-conditional": true,
+        "x-cds-type": "Base64"
+      }
+    },
+    "responses": {
+      "productList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SuperFundProductListResponse"
+            }
+          }
+        },
+        "description": "Successful response",
+        "headers": {
+          "x-v": {
+            "$ref": "#/components/headers/x-v"
+          }
+        }
+      },
+      "fundDetail": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SuperFundProductResponse"
+            }
+          }
+        },
+        "description": "Successful response",
+        "headers": {
+          "x-v": {
+            "$ref": "#/components/headers/x-v"
+          }
+        }
+      }
+    },
+    "schemas": {
+      "SuperFundProductListResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SuperFundProductListResponseData"
+          },
+          "links": {
+            "$ref": "#/components/schemas/LinksPaginated"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/MetaPaginated"
+          }
+        },
+        "required": [ "data", "links", "meta" ],
+        "type": "object"
+      },
+      "SuperFundProductResponse": {
+        "properties": {
+          "data": {
+            "allOf": [ {
+              "$ref": "#/components/schemas/SuperFundProduct"
+            }, {
+              "$ref": "#/components/schemas/SuperFundProductDetail"
+            } ]
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "required": [ "data", "links" ],
+        "type": "object"
+      },
+      
+      "MetaError": {
+        "type": "object",
+        "properties": {
+          "urn": {
+            "type": "string",
+            "description": "The CDR error code URN which the application-specific error code extends. Mandatory if the error `code` is an application-specific error rather than a standardised error code."
+          }
+        },
+        "description": "Additional data for customised error codes",
+        "x-conditional": [
+          "urn"
+        ]
+      },
+      "ResponseErrorListV2": {
+        "required": [
+          "errors"
+        ],
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "required": [
+                "code",
+                "detail",
+                "title"
+              ],
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "The code of the error encountered. Where the error is specific to the respondent, an application-specific error code, expressed as a string value. If the error is application-specific, the URN code that the specific error extends must be provided in the meta object. Otherwise, the value is the error code URN."
+                },
+                "title": {
+                  "type": "string",
+                  "description": "A short, human-readable summary of the problem that MUST NOT change from occurrence to occurrence of the problem represented by the error code."
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "A human-readable explanation specific to this occurrence of the problem."
+                },
+                "meta": {
+                  "$ref": "#/components/schemas/MetaError"
+                }
+              }
+            }
+          }
+        },
+        "x-conditional": [
+          "meta"
+        ]
+      },
+      "SuperFundProduct": {
+        "properties": {
+          "productId": {
+            "description": "The ID of the specific product",
+            "type": "string",
+            "x-cds-type": "ASCIIString"
+          },
+          "effectiveFrom": {
+            "description": "The date and time from which this product is effective (ie. is available for origination). Used to enable the articulation of products to the regime before they are available for customers to originate",
+            "type": "string",
+            "x-cds-type": "DateTimeString"
+          },
+          "effectiveTo": {
+            "description": "The date and time at which this product will be retired and will no longer be offered. Used to enable the managed deprecation of plans",
+            "type": "string",
+            "x-cds-type": "DateTimeString"
+          },
+          "lastUpdated": {
+            "description": "The last date and time that the information for this plan was changed (or the creation date for the plan if it has never been altered)",
+            "type": "string",
+            "x-cds-type": "DateTimeString"
+          },
+          "displayName": {
+            "description": "The display name of the super fund",
+            "type": "string"
+          },
+          "description": {
+            "description": "A description of the super fund",
+            "type": "string"
+          },
+          "provider": {
+            "description": "The name of the super fund provider",
+            "type": "string"             
+          },
+          "investmentType": {
+            "description": "The type of fund type.",
+            "enum": [ "CONSERVATIVE", "BALANCED", "GROWTH", "ETHICAL", "FIXED_INCOME", "OTHER" ],
+            "default": "BALANCED",
+            "type": "string"
+          },
+          "fees": {
+            "description": "A list of fees that apply to the fund",
+            "items": {
+              "$ref": "#/components/schemas/SuperFundProductFees"
+            },
+            "type": "array"
+          },
+          "performance": {
+            "description": "Performance data of the fund over a period of time e.g. 1, 3, 5, 8, 10 years",
+            "items": {
+              "$ref": "#/components/schemas/SuperFundProductPerformance"
+            },
+            "type": "array"
+          },
+          "fundInformationUri": {
+            "description": "A link to the fund web page",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "providerUri": {
+            "description": "A link to the fund providers we page",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "additionalInformation": {
+            "$ref": "#/components/schemas/SuperAdditionalInformation"
+          }
+        },
+        "required": [ "provider", "displayName", "description", "fees", "performance", "productId", "type", "investmentType" ],
+        "type": "object",
+        "x-conditional": [ "contract" ]
+      },
+      "Links": {
+        "properties": {
+          "self": {
+            "description": "Fully qualified link that generated the current response document",
+            "type": "string",
+            "x-cds-type": "URIString"
+          }
+        },
+        "required": [ "self" ],
+        "type": "object"
+      },
+      "Meta": {
+        "type": "object"
+      },
+      "LinksPaginated": {
+        "properties": {
+          "self": {
+            "description": "Fully qualified link that generated the current response document",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "first": {
+            "description": "URI to the first page of this set. Mandatory if this response is not the first page",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "prev": {
+            "description": "URI to the previous page of this set. Mandatory if this response is not the first page",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "next": {
+            "description": "URI to the next page of this set. Mandatory if this response is not the last page",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "last": {
+            "description": "URI to the last page of this set. Mandatory if this response is not the last page",
+            "type": "string",
+            "x-cds-type": "URIString"
+          }
+        },
+        "required": [ "self" ],
+        "type": "object",
+        "x-conditional": [ "first", "prev", "next", "last" ]
+      },
+      "MetaPaginated": {
+        "properties": {
+          "totalRecords": {
+            "description": "The total number of records in the full set. See [pagination](#pagination).",
+            "type": "integer",
+            "x-cds-type": "NaturalNumber"
+          },
+          "totalPages": {
+            "description": "The total number of pages in the full set. See [pagination](#pagination).",
+            "type": "integer",
+            "x-cds-type": "NaturalNumber"
+          }
+        },
+        "required": [ "totalPages", "totalRecords" ],
+        "type": "object"
+      },
+      "SuperFundProductListResponseData": {
+        "properties": {
+          "funds": {
+            "description": "Array of Super Fund Products",
+            "items": {
+              "$ref": "#/components/schemas/SuperFundProduct"
+            },
+            "type": "array"
+          }
+        },
+        "required": [ "funds" ],
+        "type": "object"
+      },
+      "SuperFundProductFees": {
+        "properties": {
+          "name": {
+            "description": "The display name of the fee",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the fee",
+            "type": "string"
+          },
+          "period": {
+            "description": "The duration of the fee frequency. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) (excludes recurrence syntax)",
+            "type": "string",
+            "x-cds-type": "ExternalRef"
+          },
+          "balance": {
+            "description": "The super fund account balance the fee is based on e.g. 50k",
+            "type": "string",
+            "x-cds-type": "AmountString"
+          },
+          "amount": {
+            "description": "The amount charged for the duration period",
+            "type": "string",
+            "x-cds-type": "AmountString"
+          }
+        },
+        "required": [ "amount", "description", "name" ],
+        "type": "object"
+      },
+      "SuperFundProductPerformance": {
+        "properties": {
+          "name": {
+            "description": "The display name of the performances metric. e.g 3 years",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the performance",
+            "type": "string"
+          },
+          "period": {
+            "description": "The duration of the performance frequency. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations) (excludes recurrence syntax)",
+            "type": "string",
+            "x-cds-type": "ExternalRef"
+          },
+          "value": {
+            "description": "The percent value of the performance over the given time frame e.g 5%",
+            "type": "string",
+            "x-cds-type": "RateString"
+          }
+        },
+        "required": [ "amount", "description", "name" ],
+        "type": "object"
+      },
+      "SuperAdditionalInformation": {
+        "description": "Object that contains links to additional information on specific topics",
+        "properties": {
+          "overviewUri": {
+            "description": "A link to a general overview of the fund",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "termsUri": {
+            "description": "A link to terms and conditions for the fund",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "eligibilityUri": {
+            "description": "A link to detail on eligibility criteria for the fund",
+            "type": "string",
+            "x-cds-type": "URIString"
+          },
+          "feesUri": {
+            "description": "A link to detail on fees for the fund",
+            "type": "string",
+            "x-cds-type": "URIString"
+          }
+        },
+        "type": "object"
+      },
+      "SuperFundProductDetail": {
+        "properties": {
+          "features": {
+            "description": "Optional list of features of the fund",
+            "items": {
+              "$ref": "#/components/schemas/SuperFundProductDetailFeature"
+            },
+            "type": "array"
+          }
+        },
+        "required": [ "features" ],
+        "type": "object"
+      },
+      "SuperFundProductDetailFeature": {
+        "properties": {
+          "displayName": {
+            "description": "The display name of the feature",
+            "type": "string"
+          },
+          "description": {
+            "description": "The description of the feature",
+            "type": "string"
+          },
+          "featureUri": {
+            "description": "The Uri link to the feature",
+            "type": "string",
+            "x-cds-type": "U"
+          }          
+        },
+        "required": [ "displayName" ],
+        "type": "object"
+      }
+    }
+  }
+}
