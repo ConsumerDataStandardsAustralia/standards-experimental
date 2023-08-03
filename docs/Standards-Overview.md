@@ -36,5 +36,11 @@ communicate capabilities.
 *Standard:* [Superannuation Product Standards](./Standards/Super-Product.html)<br/>
 *Current Version:* 0.0.1<br/>
 *Description:*<br/>
-Product API's proposal for Superannuation sector
+Product API's proposal for Superannuation retail products
 
+# 
+
+*Standard:* [Home Insurance Product Standards](./Standards/Insurance-Home-Product.html)<br/>
+*Current Version:* 0.0.1<br/>
+*Description:*<br/>
+Product API's proposal for Home Insurance products
