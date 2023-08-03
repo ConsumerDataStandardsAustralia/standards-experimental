@@ -881,7 +881,7 @@
       "type" : "array",
       "description" : "The type of investment types supported",
       "items" : {
-        "properties" : { }
+        "$ref" : "#/components/schemas/SuperFundProductInvestmentType"
       }
     },
     "fees" : {
@@ -893,7 +893,7 @@
     },
     "performance" : {
       "type" : "array",
-      "description" : "Performance data of the fund over a period of time e.g. 1, 3, 5, 8, 10 years",
+      "description" : "Performance data of the fund over a period of time e.g. 1, 3, 5, 10 years",
       "items" : {
         "$ref" : "#/components/schemas/SuperFundProductPerformance"
       }
@@ -1018,7 +1018,7 @@
   }
 };
             defs["SuperFundProductPerformance"] = {
-  "required" : [ "amount", "description", "name" ],
+  "required" : [ "description", "name", "period", "value" ],
   "type" : "object",
   "properties" : {
     "name" : {
@@ -1651,7 +1651,7 @@ except ApiException as e:
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Obtain a list of superannuations products that are currently offered to the market.
+                        <p class="marked">Obtain a list of superannuation products that are currently offered to the market.
 
 Note that the results returned by this end point are expected to be ordered in descending order according to &#x60;lastUpdated&#x60;.</p>
                         <p></p>
@@ -2827,7 +2827,7 @@ except ApiException as e:
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Obtain a list of superannuations products that are currently offered to the market.
+                        <p class="marked">Obtain a list of superannuation products that are currently offered to the market.
 
 Note that the results returned by this end point are expected to be ordered in descending order according to &#x60;lastUpdated&#x60;.</p>
                         <p></p>

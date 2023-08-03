@@ -20,7 +20,7 @@
   "paths": {
     "/super/products": {
       "get": {
-        "description": "Obtain a list of superannuations products that are currently offered to the market.\n\nNote that the results returned by this end point are expected to be ordered in descending order according to `lastUpdated`.",
+        "description": "Obtain a list of superannuation products that are currently offered to the market.\n\nNote that the results returned by this end point are expected to be ordered in descending order according to `lastUpdated`.",
         "operationId": "listProducts",
         "parameters": [ {
           "name": "investmentType",
@@ -472,12 +472,9 @@
           "investmentTypes": {
             "description": "The type of investment types supported",
             "items": {
-              "properties": {           
                 "$ref": "#/components/schemas/SuperFundProductInvestmentType"
-              }
             },
-            "type": "array",
-            "required": "investmentType"
+            "type": "array"
           },
           "fees": {
             "description": "A list of fees that apply to the fund",
@@ -487,7 +484,7 @@
             "type": "array"
           },
           "performance": {
-            "description": "Performance data of the fund over a period of time e.g. 1, 3, 5, 8, 10 years",
+            "description": "Performance data of the fund over a period of time e.g. 1, 3, 5, 10 years",
             "items": {
               "$ref": "#/components/schemas/SuperFundProductPerformance"
             },
@@ -651,7 +648,7 @@
             "x-cds-type": "RateString"
           }
         },
-        "required": [ "amount", "description", "name" ],
+        "required": [ "value", "period", "description", "name" ],
         "type": "object"
       },
       "SuperAdditionalInformation": {
