@@ -27,7 +27,7 @@ The product API contains two API's
 | API | Method | Path |  Description | 
 |-|-|-|-|
 |Get Products | GET | {ProviderURI} **/super/products**| Returns a list of Super Funds offered to the market |
-|Get ProductDetail | GET | {ProviderURI} **/super/products{productId}**| Returns a specific Fund details  offered to the market |
+|Get ProductDetail | GET | {ProviderURI} **/super/products{productId}**| Returns a specific Fund details offered to the market |
 
 
 ## Specification
