@@ -458,11 +458,26 @@
             "description": "The name of the super fund provider",
             "type": "string"             
           },
-          "investmentType": {
-            "description": "The type of fund type.",
-            "enum": [ "CONSERVATIVE", "BALANCED", "GROWTH", "ETHICAL", "FIXED_INCOME", "OTHER" ],
-            "default": "BALANCED",
+          "inceptionDate": {
+            "description": "Inception date of the fund.",
+            "type": "string",
+            "x-cds-type": "DateString"
+          },
+          "status": {
+            "description": "The status. PUBLIC open to any members, CLOSED not open to new members, EMPLOYER open to employee cohorts",
+            "enum": [ "PUBLIC", "CLOSED", "EMPLOYEE" ],
+            "default": "PUBLIC",
             "type": "string"
+          },
+          "investmentTypes": {
+            "description": "The type of investment types supported",
+            "items": {
+              "properties": {           
+                "$ref": "#/components/schemas/SuperFundProductInvestmentType"
+              }
+            },
+            "type": "array",
+            "required": "investmentType"
           },
           "fees": {
             "description": "A list of fees that apply to the fund",
@@ -482,6 +497,11 @@
             "description": "A link to the fund web page",
             "type": "string",
             "x-cds-type": "URIString"
+          },          
+          "pdsUri": {
+            "description": "A link to the product disclosure statement",
+            "type": "string",
+            "x-cds-type": "URIString"
           },
           "providerUri": {
             "description": "A link to the fund providers web page",
@@ -492,9 +512,9 @@
             "$ref": "#/components/schemas/SuperAdditionalInformation"
           }
         },
-        "required": [ "provider", "displayName", "description", "fees", "performance", "productId", "type", "investmentType" ],
+        "required": [ "provider", "displayName", "description", "investmentTypes", "fees", "performance", "productId", "type", "investmentType" ],
         "type": "object",
-        "x-conditional": [ "contract" ]
+        "x-conditional": [ "" ]
       },
       "Links": {
         "properties": {
@@ -571,6 +591,16 @@
         "required": [ "funds" ],
         "type": "object"
       },
+      "SuperFundProductInvestmentType": {        
+        "properties": {
+          "investmentType": {
+            "enum": [ "CONSERVATIVE", "BALANCED", "GROWTH", "ETHICAL", "FIXED_INCOME", "OTHER" ],
+            "default": "BALANCED",
+            "type": "string"      
+          }
+        }
+      },
+
       "SuperFundProductFees": {
         "properties": {
           "name": {
@@ -616,7 +646,7 @@
             "x-cds-type": "ExternalRef"
           },
           "value": {
-            "description": "The percent value of the performance over the given time frame e.g 5%",
+            "description": "The percent value of the performance over the given time frame e.g 5.1%",
             "type": "string",
             "x-cds-type": "RateString"
           }

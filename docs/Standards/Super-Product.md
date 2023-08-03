@@ -12,9 +12,19 @@ This standards provides a product API set for publicly available superannuation 
 
 <Introduction>
 
+The API covers retail superannuation products. Product data includes:
+
+* Name of fund
+* Provider
+* Status
+* Investment Types
+* Fees 
+* Performance
+* Links - PDS, Fund and Provider details
+
 The product API contains two API's
 
-| API | Method | Path |  Description |
+| API | Method | Path |  Description | 
 |-|-|-|-|
 |Get Products | GET | {ProviderURI} **/super/products**| Returns a list of Super Funds offered to the market |
 |Get ProductDetail | GET | {ProviderURI} **/super/products{productId}**| Returns a specific Fund details  offered to the market |
