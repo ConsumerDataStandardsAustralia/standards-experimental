@@ -5,14 +5,14 @@
 Insurance sector experimental product API's to describe **Home Insurance** products.
 
 ## Abstract
-This standards provides a product API set for publicly available superannuation products. It aligns to the product API interface used in the [banking](https://consumerdatastandardsaustralia.github.io/standards/#get-products) and [energy](https://consumerdatastandardsaustralia.github.io/standards/#energy-apis) sectors.
+This standards provides a product API set for publicly available home insurance products. It aligns to the product API interface used in the [banking](https://consumerdatastandardsaustralia.github.io/standards/#get-products) and [energy](https://consumerdatastandardsaustralia.github.io/standards/#energy-apis) sectors.
 
 
 ## Introduction
 
 <Introduction>
 
-The API covers retail home insurabce products. Product data includes:
+The API covers retail home insurance products. Product data includes:
 
 * Insurer
 * Product Name & Details
@@ -26,7 +26,7 @@ The product API contains two API's
 | API | Method | Path |  Description | 
 |-|-|-|-|
 |Get Products | GET | {ProviderURI} **/insurance/home/products/**| Returns a list of Home Insurance products offered to the market |
-|Get ProductDetail | GET | {ProviderURI} **/super/home/products{productId}**| Returns a specific home insurance product details offered to the market |
+|Get Product Detail | GET | {ProviderURI} **/insurance/home/products/{productId}**| Returns a specific home insurance product details offered to the market |
 
 
 ## Specification
