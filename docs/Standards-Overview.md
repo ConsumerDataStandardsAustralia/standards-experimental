@@ -31,12 +31,12 @@ Additional endpoints, and extensions to existing endpoints, to facilitate the re
 Standalone standard for generic discovery mechanism for an online service to
 communicate capabilities.
 
-# 
+<-- # -->
 
-*Standard:* [Banking Product Extensionss](./Standards/Banking-Product-Ext.html)<br/>
-*Current Version:* 0.0.1<br/>
-*Description:*<br/>
-Product API's proposal for Banking Product Extensions
+<-- *Standard:* [Banking Product Extensions](./Standards/Banking-Product-Ext.html)<br/> -->
+<-- *Current Version:* 0.0.1<br/> -->
+<-- *Description:*<br/> -->
+<-- Product API's proposal for Banking Product Extensions --> 
 
 # 
 

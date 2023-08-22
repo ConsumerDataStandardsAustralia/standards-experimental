@@ -1210,7 +1210,7 @@
               "description": "The maximum number of installments. e,g 4 instalments",
               "x-cds-type": "PositiveInteger"
             },
-            "instalmentfrequency": {
+            "instalmentFrequency": {
               "description": "The installment frequency",
               "enum": [
                 "WEEKLY",
