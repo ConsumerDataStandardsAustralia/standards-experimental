@@ -1,7 +1,7 @@
 # Banking Product API Extension
 **EXPERIMENTAL**
 
-*Current Version:* **0.0.1**
+*Current Version:* **0.0.2**
 Superannuation sector experimental product API's to describe superannuation products.
 
 ## Abstract
