@@ -14,9 +14,7 @@ The standard defines the following:
 
 - Extensions to te product reference data endpoints to allow forthe communication of supported origination capabilities and application requirements
 - Additional endpoint for the submission of an account application for a new customer
-- Additional endpoint for the submission of an account application for an existing customer
 
-The standard is defined
 
 ## Introduction
 
@@ -35,16 +33,68 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Specification
 
-<Put the standard statements here>
+### Foundational Standards
 
+This specification is an extension to the Consumer Data Standards ([**[CDS]**](#normative-cds)))
+
+### Extension to the Consumer Data Standards
+
+This standard adheres to the extensibility guidelines outlined in the `Extensibility` section of [**[CDS]**](#normative-cds).
+
+The Holder Identifier (`HID`) as described in [**[CDS]**](#normative-cds) will be defined as **DSB** indicating that this is an extension defined in a DSB curated standard.
+
+### Addition to Get Product Details
+
+An additional field **SHALL** be added to Get Product Details defined in [**[CDS]**](#normative-cds).
+
+The definition of this field **SHALL** be as follows:
+
+* Named `DSB-origination-schemes`
+* The field will contain an array of scheme IDs referencing schemes defined via the Get Origination Scheme endpoint
+* The type of each element in the array will be `ASCIIString` as defined in [**[CDS]**](#normative-cds)
+
+### Get Origination Scheme endpoint
+
+An additional endpoint **SHALL** be provided by the ASP called `Get Origination Scheme` that will be used to obtain the meta data describing how to make an application for a family of products.
+
+The resource path for this endpoint **SHALL** be: `DSB/banking/origination/schemes/{schemeId}`
+
+Where:
+* The schemeId is a unique identifier of a specific scheme.  This identifier is **NOT REQUIRED** to adhere to ID permanence rules defined in [**[CDS]**](#normative-cds)
+* The endpoint **SHALL** be accessed using the HTTP GET method
+* The endpoint **SHALL** be accessed via the `ExtensionBaseUri` base path defined for the ASP in the CDR Register
+* The endpoint **SHALL** implement the security requirements defined in [**[CDS]**](#normative-cds) for unauthenticated endpoints
+
+More details on the operation of the `Get Origination Scheme` appear later in this standard.
+
+### Apply For Product endpoint
+
+An additional endpoint **SHALL** be provided by the ASP called `Apply For Product` that will be used to apply for a product.
+
+The resource path for this endpoint **SHALL** be: `DSB/banking/accounts`
+
+Where:
+* The endpoint **SHALL** be accessed using the HTTP POST method
+* The endpoint **SHALL** be accessed via the `ExtensionBaseUri` base path defined for the ASP in the CDR Register
+* The endpoint **SHALL** implement the security requirements defined in [**[CDS]**](#normative-cds) for `Private Key JWT Client Authentication`
+* A scope claim or Access Token is **NOT REQUIRED** to invoke the endpoint
+
+More details on the operation of the `Apply For Product Scheme` appear later in this standard.
+
+### OAS specifications
+
+TBD
+
+
+## Normative References
 
 | Reference | Description |
 |-|-|
 | RFC2119 <a id="normative-rfc2119"/> | Bradner, S., "Key words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997, https://www.rfc-editor.org/info/rfc2119. |
 | RFC8174 <a id="normative-rfc8174"/> | Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174, May 2017, https://www.rfc-editor.org/info/rfc8174. |
+| CDS <a id="normative-cds"/> | The latest version of the Consumer Data Standards as they are updated from time to time, https://consumerdatastandardsaustralia.github.io/standards. |
+
 
 ## Informative References
 
-| Reference | Description |
-|-|-|
-| | |
+None

@@ -33,7 +33,7 @@ communicate capabilities.
 
 # 
 
-*Standard:* [Banking Product Extensionss](./Standards/Banking-Product-Ext.html)<br/>
+*Standard:* [Banking Product Extensions](./Standards/Banking-Product-Ext.html)<br/>
 *Current Version:* 0.0.1<br/>
 *Description:*<br/>
 Product API's proposal for Banking Product Extensions
