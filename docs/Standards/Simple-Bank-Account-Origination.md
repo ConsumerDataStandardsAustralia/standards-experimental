@@ -2,7 +2,7 @@
 
 **EXPERIMENTAL**
 
-*Current Version:* **0.0.1**
+*Current Version:* **0.0.3**
 
 Additional endpoints, and extensions to existing endpoints, to facilitate the receipt of an account opening instruction to begin the process of a customer opening a new bank account.
 
@@ -17,8 +17,6 @@ The standard defines the following:
 
 
 ## Introduction
-
-<Introduction>
 
 ### Requirements Language
 
@@ -81,9 +79,53 @@ Where:
 
 More details on the operation of the `Apply For Product Scheme` appear later in this standard.
 
-### OAS specifications
+### Detailed specifications
 
-TBD
+#### CDR Extension Specifications
+
+The following JSON Schema snippet defines the extension fields to be added to the standard payload of the `Get Product Detail` endpoint defined in [**[CDS]**](#normative-cds).
+
+This JSON Schema is to be understood as representing an addition to root object of the `Get Product Detail` response payload and therefore includes intermediate fields that are already defined in [**[CDS]**](#normative-cds).
+
+```
+{
+   "$schema": "http://json-schema.org/draft-07/schema",
+   "type": "object",
+   "required": [
+      "data",
+   ],
+   "properties": {
+      "data": {
+         "type": "object",
+         "properties": {
+            "DSB-origination-schemes": {
+               "type": "array",
+               "description": "Array of IDs to origination schemes that
+                               can be obtained from the `Get Origination
+                               Scheme` endpoint",
+                "items": {
+                    "type": "string"
+                }
+            }
+         }
+      }
+   }
+}
+```
+
+#### OpenAPI Specification
+
+The OpenAPI specification for this standard can be found at the links below:
+
+* [OpenAPI Specification in JSON format](../Support_Files/Simple-Bank-Account-Origination.json)
+* [OpenAPI Specification in HTML format](../Support_Files/Simple-Bank-Account-Origination-OAS.html)
+
+These specifications contain the details of the `Get Origination Scheme` endpoint and the `Apply For Product` endpoint.
+
+## TODO
+
+* Complete the OAS specification for the `Get Origination Scheme` endpoint
+* Complete the OAS specification for the `Apply For Product` endpoint
 
 
 ## Normative References
