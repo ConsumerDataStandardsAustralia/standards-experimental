@@ -1,4 +1,4 @@
-<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.2</h1>
+<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.3</h1>
 
 Specification of endpoints defined in the Simple Bank Account Origination experimental standard.  This is an experimental standard created by the Data Standards Body (DSB) as part of the Consumer Data Standards
 
