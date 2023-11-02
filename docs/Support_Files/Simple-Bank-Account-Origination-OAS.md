@@ -1,14 +1,3 @@
----
-title: CDR Experimantal Simple Bank Account Origination API
-language_tabs: []
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
-
----
-
 <h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.4</h1>
 
 > Scroll down for example requests and responses.
