@@ -12,7 +12,7 @@
             "url": "https://opensource.org/licenses/MIT"
         },
         "title": "CDR Experimantal Simple Bank Account Origination API",
-        "version": "0.0.3"
+        "version": "0.0.4"
     },
     "servers": [
         {
@@ -51,7 +51,9 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/OriginationSchemeResponseV1"
+                                }
                             }
                         },
                         "description": "Successful response",
@@ -95,7 +97,7 @@
             }
         },
         "/DSB/banking/accounts": {
-            "summary": "Apply For Account",
+            "summary": "Apply For Bank Account",
             "x-version": "1",
             "post": {
                 "description": "Submit an application, on behalf of a consumer, to apply for an account to be originated.",
@@ -200,18 +202,123 @@
         },
         "responses": {},
         "schemas": {
-            "MetaError": {
+            "OriginationSchemeResponseV1": {
+                "required": [
+                    "data",
+                    "links",
+                    "meta"
+                ],
                 "type": "object",
                 "properties": {
-                    "urn": {
-                        "type": "string",
-                        "description": "The CDR error code URN which the application-specific error code extends. Mandatory if the error `code` is an application-specific error rather than a standardised error code."
+                    "data": {
+                        "required": [
+                            "schemeUType"
+                        ],
+                        "x-conditional": [
+                            "lixi1",
+                            "lixi2",
+                            "cdrApplyV1"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "schemeUType": {
+                                "type": "string",
+                                "description": "The type of origination scheme represented",
+                                "enum": [
+                                    "lixi1",
+                                    "lixi2",
+                                    "cdrApplyForBankAccountV1"
+                                ]
+                            },
+                            "lixi1": {
+                                "type": "object",
+                                "description": "Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'",
+                                "properties": {}
+                            },
+                            "lixi2": {
+                                "type": "object",
+                                "description": "Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'",
+                                "required": [
+                                    "baseUri",
+                                    "lixiCode",
+                                    "lixiVersion"
+                                ],
+                                "properties": {
+                                    "baseUri": {
+                                        "type": "string",
+                                        "description": "Base path used to access the LIXI2 gateway",
+                                        "x-cds-type": "URIString"
+                                    },
+                                    "lixiCode": {
+                                        "type": "string",
+                                        "description": "The LIXI participant code, assigned by LIXI, for the receiving organisation"
+                                    },
+                                    "lixiVersion": {
+                                        "type": "string",
+                                        "description": "The supported version of the LIXI2 schema"
+                                    },
+                                    "lixiCustomVersion": {
+                                        "type": "string",
+                                        "description": "Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema"
+                                    },
+                                    "apiVersion": {
+                                        "type": "string",
+                                        "description": "Optional version of an API schema definition"
+                                    },
+                                    "productCodeMappings": {
+                                        "type": "array",
+                                        "description": "Optional mapping of CDR product IDs to product codes used in LIXI applications via this origination scheme.  If absent, or if a mapping is not included, then the CDR product ID is expected to be used as the LIXI product code",
+                                        "items": {
+                                            "required": [
+                                                "productId",
+                                                "productCode"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "productId": {
+                                                    "type": "string",
+                                                    "description": "The CDR product ID to map from"
+                                                },
+                                                "productCode": {
+                                                    "type": "string",
+                                                    "description": "The LIXI product code to map to"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "schematronUri": {
+                                        "type": "string",
+                                        "description": "Optional reference to a Schematron file indicating the valid use of this LIXI gateway",
+                                        "x-cds-type": "URIString"
+                                    },
+                                    "apiSpecificationUri": {
+                                        "type": "string",
+                                        "description": "Optional reference to an Open API Specification file describing the API version specified in the 'apiVersion' field",
+                                        "x-cds-type": "URIString"
+                                    },
+                                    "customVersionUri": {
+                                        "type": "string",
+                                        "description": "Optional reference to additional information describing the customisations and extensions make to the LIXI scheams",
+                                        "x-cds-type": "URIString"
+                                    }
+                                }
+                            },
+                            "cdrApplyForBankAccountV1": {
+                                "type": "object",
+                                "description": "Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'",
+                                "required": [
+                                ],
+                                "properties": {}
+                            }
+                        }
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/Links"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/Meta"
                     }
-                },
-                "description": "Additional data for customised error codes",
-                "x-conditional": [
-                    "urn"
-                ]
+                }
             },
             "ResponseErrorListV2": {
                 "required": [
@@ -326,6 +433,19 @@
                     "totalRecords"
                 ],
                 "type": "object"
+            },
+            "MetaError": {
+                "type": "object",
+                "properties": {
+                    "urn": {
+                        "type": "string",
+                        "description": "The CDR error code URN which the application-specific error code extends. Mandatory if the error `code` is an application-specific error rather than a standardised error code."
+                    }
+                },
+                "description": "Additional data for customised error codes",
+                "x-conditional": [
+                    "urn"
+                ]
             }
         }
     }

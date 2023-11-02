@@ -2,7 +2,7 @@
 
 **EXPERIMENTAL**
 
-*Current Version:* **0.0.3**
+*Current Version:* **0.0.4**
 
 Additional endpoints, and extensions to existing endpoints, to facilitate the receipt of an account opening instruction to begin the process of a customer opening a new bank account.
 
