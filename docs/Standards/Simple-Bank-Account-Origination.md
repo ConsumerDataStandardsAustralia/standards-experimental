@@ -12,7 +12,7 @@ This standard defines a set of extensions to the existing consumer data standard
 
 The standard defines the following:
 
-- Extensions to te product reference data endpoints to allow forthe communication of supported origination capabilities and application requirements
+- Extensions to the product reference data endpoints to allow forthe communication of supported origination capabilities and application requirements
 - Additional endpoint for the submission of an account application for a new customer
 
 
@@ -47,7 +47,7 @@ An additional field **SHALL** be added to Get Product Details defined in [**[CDS
 
 The definition of this field **SHALL** be as follows:
 
-* Named `DSB-origination-schemes`
+* Named `DSB-originationSchemes`
 * The field will contain an array of scheme IDs referencing schemes defined via the Get Origination Scheme endpoint
 * The type of each element in the array will be `ASCIIString` as defined in [**[CDS]**](#normative-cds)
 
@@ -98,7 +98,7 @@ This JSON Schema is to be understood as representing an addition to root object 
       "data": {
          "type": "object",
          "properties": {
-            "DSB-origination-schemes": {
+            "DSB-originationSchemes": {
                "type": "array",
                "description": "Array of IDs to origination schemes that
                                can be obtained from the `Get Origination

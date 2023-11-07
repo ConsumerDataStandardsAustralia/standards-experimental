@@ -16,6 +16,12 @@ The experimental standards are [published here](https://consumerdatastandardsaus
 
 Consultation on the standards as they evolve is performed transparently with any interested contributor invited to participate in accordance with the rules of engagement described below.
 
+Note that the conversion of OpenAPI Specification files to markdown is recommended to be done using widdershins using the following command line statements from the `Support_Files` folder.
+
+`npm install -g widdershins`
+
+`widdershins --environment env.json input_oas.json -o output_markdown.md`
+
 ## The Consumer Data Standards
 
 These standards are not the binding standards created for the Consumer Data Right.  The binding standards can be found in the [main consumer data standards repository](https://github.com/ConsumerDataStandardsAustralia/standards/issues).
