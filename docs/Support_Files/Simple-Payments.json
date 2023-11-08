@@ -129,11 +129,74 @@
                 "properties": {
                     "data": {
                         "required": [
-                        ],
-                        "x-conditional": [
+                            "to",
+                            "from",
+                            "instruction"
                         ],
                         "type": "object",
                         "properties": {
+                            "to": {
+                                "type": "object",
+                                "required": [
+                                    "toUType"
+                                ],
+                                "x-conditional": [
+                                    "accountId"
+                                ],
+                                "properties": {
+                                    "toUType": {
+                                        "type": "string",
+                                        "description": "Indicates the type of object used to define the destination account for the payment",
+                                        "enum": [
+                                            "accountId"
+                                        ]
+                                    },
+                                    "accountId": {
+                                        "type": "string",
+                                        "description": "The ID of the destination account previous obtained from a CDR account endpoint call for this consumer. Mandatory if toUType is set to `accountId`"
+                                    }
+                                }
+                            },
+                            "from": {
+                                "type": "object",
+                                "required": [
+                                    "fromUType"
+                                ],
+                                "x-conditional": [
+                                    "accountId"
+                                ],
+                                "properties": {
+                                    "toUType": {
+                                        "type": "string",
+                                        "description": "Indicates the type of object used to define the source account for the payment",
+                                        "enum": [
+                                            "accountId"
+                                        ]
+                                    },
+                                    "accountId": {
+                                        "type": "string",
+                                        "description": "The ID of the source account previous obtained from a CDR account endpoint call for this consumer. Mandatory if fromUType is set to `accountId`"
+                                    }
+                                }
+                            },
+                            "instruction": {
+                                "type": "object",
+                                "required": [
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "amount": {
+                                        "type": "string",
+                                        "description": "The amount to be paid",
+                                        "x-cds-type": "AmountString"
+                                    },
+                                    "currency": {
+                                        "type": "string",
+                                        "description": "The currency the payment will be made in.  Assumes AUD if absent",
+                                        "x-cds-type": "CurrencyString"
+                                    }
+                                }
+                            }
                         }
                     },
                     "meta": {
@@ -151,11 +214,39 @@
                 "properties": {
                     "data": {
                         "required": [
+                            "paymentStatus"
                         ],
                         "x-conditional": [
+                            "rejectionReason"
                         ],
                         "type": "object",
                         "properties": {
+                            "paymentStatus": {
+                                "type": "string",
+                                "description": "Status of the payment instruction.  Values are:\n* PENDING - The payment is staged but will be processed asynchronously\n* AUTHORISATION_REQUIRED - Manual authorisation is required before processing can occur\n* PAID - The payment has been successfully processed\n* REJECTED - The payment has been rejected (see `rejectionReason` for more detail)",
+                                "enum": [
+                                    "PENDING",
+                                    "AUTHORISATION_REQUIRED",
+                                    "PAID",
+                                    "REJECTED"
+                                ]
+                            },
+                            "transactionId": {
+                                "type": "string",
+                                "description": "If the paymentStatus is `PAID` then this field may optionally contain an ID of the transaction that can be used to call the CDR Get Transaction Detail endpoint"
+                            },
+                            "rejectionReason": {
+                                "type": "string",
+                                "description": "Mandatory if `paymentStatus` is set to `REJECTED`.  Values are:\n* LIMIT - A payment limit has been encountered that prevents this payment\n* TO_ACCOUNT - The to account is invalid\n* FROM_ACCOUNT - The from account is invalid\n* BALANCE - Insufficient balance to complete the payment\n* NOT_SUPPORTED_TO - The payment type is not supported by the source account\n* NOT_SUPPORTED_FROM - The payment type is not supported by the destination account\n* UNDISCLOSED - The payment failed for an undisclosed reason",
+                                "enum": [
+                                    "LIMIT",
+                                    "TO_ACCOUNT",
+                                    "FROM_ACCOUNT",
+                                    "BALANCE",
+                                    "NOT_SUPPORTED",
+                                    "UNDISCLOSED"
+                                ]
+                            }
                         }
                     },
                     "links": {

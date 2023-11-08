@@ -29,7 +29,20 @@ Submit a payment instruction on behalf of a consumer.
 
 ```json
 {
-  "data": {},
+  "data": {
+    "to": {
+      "toUType": "accountId",
+      "accountId": "string"
+    },
+    "from": {
+      "toUType": "accountId",
+      "accountId": "string"
+    },
+    "instruction": {
+      "amount": "string",
+      "currency": "string"
+    }
+  },
   "meta": {}
 }
 ```
@@ -48,7 +61,11 @@ Submit a payment instruction on behalf of a consumer.
 
 ```json
 {
-  "data": {},
+  "data": {
+    "paymentStatus": "PENDING",
+    "transactionId": "string",
+    "rejectionReason": "LIMIT"
+  },
   "links": {
     "self": "string"
   },
@@ -85,7 +102,20 @@ This operation does not require authentication
 
 ```json
 {
-  "data": {},
+  "data": {
+    "to": {
+      "toUType": "accountId",
+      "accountId": "string"
+    },
+    "from": {
+      "toUType": "accountId",
+      "accountId": "string"
+    },
+    "instruction": {
+      "amount": "string",
+      "currency": "string"
+    }
+  },
   "meta": {}
 }
 
@@ -96,7 +126,23 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |data|object|true|none|none|
+|» to|object|true|none|none|
+|»» toUType|string|true|none|Indicates the type of object used to define the destination account for the payment|
+|»» accountId|string|false|none|The ID of the destination account previous obtained from a CDR account endpoint call for this consumer. Mandatory if toUType is set to `accountId`|
+|» from|object|true|none|none|
+|»» toUType|string|false|none|Indicates the type of object used to define the source account for the payment|
+|»» accountId|string|false|none|The ID of the source account previous obtained from a CDR account endpoint call for this consumer. Mandatory if fromUType is set to `accountId`|
+|» instruction|object|true|none|none|
+|»» amount|string|true|none|The amount to be paid|
+|»» currency|string|false|none|The currency the payment will be made in.  Assumes AUD if absent|
 |meta|[Meta](#schemameta)|true|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|toUType|accountId|
+|toUType|accountId|
 
 <h2 id="tocS_PostPaymentInstructionResponseV1">PostPaymentInstructionResponseV1</h2>
 <!-- backwards compatibility -->
@@ -107,7 +153,11 @@ This operation does not require authentication
 
 ```json
 {
-  "data": {},
+  "data": {
+    "paymentStatus": "PENDING",
+    "transactionId": "string",
+    "rejectionReason": "LIMIT"
+  },
   "links": {
     "self": "string"
   },
@@ -121,8 +171,26 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |data|object|true|none|none|
+|» paymentStatus|string|true|none|Status of the payment instruction.  Values are:<br>* PENDING - The payment is staged but will be processed asynchronously<br>* AUTHORISATION_REQUIRED - Manual authorisation is required before processing can occur<br>* PAID - The payment has been successfully processed<br>* REJECTED - The payment has been rejected (see `rejectionReason` for more detail)|
+|» transactionId|string|false|none|If the paymentStatus is `PAID` then this field may optionally contain an ID of the transaction that can be used to call the CDR Get Transaction Detail endpoint|
+|» rejectionReason|string|false|none|Mandatory if `paymentStatus` is set to `REJECTED`.  Values are:<br>* LIMIT - A payment limit has been encountered that prevents this payment<br>* TO_ACCOUNT - The to account is invalid<br>* FROM_ACCOUNT - The from account is invalid<br>* BALANCE - Insufficient balance to complete the payment<br>* NOT_SUPPORTED_TO - The payment type is not supported by the source account<br>* NOT_SUPPORTED_FROM - The payment type is not supported by the destination account<br>* UNDISCLOSED - The payment failed for an undisclosed reason|
 |links|[Links](#schemalinks)|true|none|none|
 |meta|[Meta](#schemameta)|true|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|paymentStatus|PENDING|
+|paymentStatus|AUTHORISATION_REQUIRED|
+|paymentStatus|PAID|
+|paymentStatus|REJECTED|
+|rejectionReason|LIMIT|
+|rejectionReason|TO_ACCOUNT|
+|rejectionReason|FROM_ACCOUNT|
+|rejectionReason|BALANCE|
+|rejectionReason|NOT_SUPPORTED|
+|rejectionReason|UNDISCLOSED|
 
 <h2 id="tocS_ResponseErrorListV2">ResponseErrorListV2</h2>
 <!-- backwards compatibility -->
