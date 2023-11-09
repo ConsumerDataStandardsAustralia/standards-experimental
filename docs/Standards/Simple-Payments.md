@@ -8,7 +8,7 @@ Additional endpoints, and extensions to existing endpoints, to facilitate simple
 
 ## Abstract
 
-This standard defines a set of extensions to the existing consumer data standards.  It defines mechanisms for a bank, or non-bank lender, acting as an Action Service Provider (ASP), to receive payment instructions from an Accredited Action Initiator (AAI) for simple bank account to bank account payments.
+This standard defines a set of extensions to the existing Consumer Data Standards.  It defines mechanisms for a bank, or non-bank lender, acting as an Action Service Provider (ASP), to receive payment instructions from an Accredited Action Initiator (AAI) for simple bank account to bank account payments.
 
 The standard defines the following:
 
@@ -28,7 +28,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 | Term | Definition |
 |-|-|
-| Accredited Action Initiator (AAI) | A software product that is accredited to initiate actions under CDR.  The equivalent of an Accredited Data Recipient under the current CDR regime |
+| Accredited Action Initiator (AAI) | A software product that is operated by an entity accredited to initiate actions under CDR.  The equivalent of an Accredited Data Recipient under the current CDR regime |
 | Action Service Provider (ASP) | A server implementation that supports the receipt of an action instruction from an AAI.  The equivalent of a Data Holder under the current CDR regime |
 
 ## Specification
@@ -81,7 +81,7 @@ The field `DSB-supportedPaymentTypes` will be an object.  The schema of this def
 
 Note that the enumeration values for outbound payments types are to be interpreted as follows:
 
-* TRANSFER - Account to account transfer between the customers own account
+* TRANSFER - Account to account transfer between the customers own accounts
 
 In the future additional enumeration values can be added to support additional payment types.
 
