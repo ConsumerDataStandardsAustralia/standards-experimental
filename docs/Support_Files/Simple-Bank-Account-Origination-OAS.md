@@ -1,4 +1,6 @@
-<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.4</h1>
+<!-- Generator: Widdershins v4.0.1 -->
+
+<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.5</h1>
 
 > Scroll down for example requests and responses.
 
@@ -56,7 +58,67 @@ Obtain the meta data describing how to make an application for a family of produ
       "apiSpecificationUri": "string",
       "customVersionUri": "string"
     },
-    "cdrApplyForBankAccountV1": {}
+    "cdrApplyForBankAccountV1": {
+      "version": "string",
+      "minVersion": "string",
+      "dataRequirements": {
+        "v1": {
+          "referrer": {
+            "requirement": "REQUIRED",
+            "confirmNeedsAnalysisConducted": {
+              "requirement": "REQUIRED"
+            },
+            "confirmTargetMarketAssessed": {
+              "requirement": "REQUIRED"
+            },
+            "confirmTerms": {
+              "requirement": "REQUIRED",
+              "terms": [
+                {
+                  "displayName": "string",
+                  "termId": "string",
+                  "uri": "string",
+                  "mimeType": "string"
+                }
+              ]
+            }
+          },
+          "applicants": {
+            "requirement": "REQUIRED"
+          },
+          "products": {
+            "requirement": "REQUIRED"
+          },
+          "income": {
+            "requirement": "REQUIRED"
+          },
+          "expenses": {
+            "requirement": "REQUIRED"
+          },
+          "assets": {
+            "requirement": "REQUIRED"
+          },
+          "liabilities": {
+            "requirement": "REQUIRED"
+          },
+          "cdrData": {
+            "requirement": "REQUIRED",
+            "cdrAccounts": {
+              "requirement": "REQUIRED"
+            },
+            "cdrAccountDetails": {
+              "requirement": "REQUIRED"
+            },
+            "cdrBalances": {
+              "requirement": "REQUIRED"
+            },
+            "cdrCustomerDetails": {
+              "requirement": "REQUIRED"
+            }
+          }
+        }
+      }
+    }
   },
   "links": {
     "self": "string"
@@ -139,9 +201,12 @@ This operation does not require authentication
 
 # Schemas
 
-<h2 id="tocSoriginationschemeresponsev1">OriginationSchemeResponseV1</h2>
-
+<h2 id="tocS_OriginationSchemeResponseV1">OriginationSchemeResponseV1</h2>
+<!-- backwards compatibility -->
 <a id="schemaoriginationschemeresponsev1"></a>
+<a id="schema_OriginationSchemeResponseV1"></a>
+<a id="tocSoriginationschemeresponsev1"></a>
+<a id="tocsoriginationschemeresponsev1"></a>
 
 ```json
 {
@@ -164,7 +229,67 @@ This operation does not require authentication
       "apiSpecificationUri": "string",
       "customVersionUri": "string"
     },
-    "cdrApplyForBankAccountV1": {}
+    "cdrApplyForBankAccountV1": {
+      "version": "string",
+      "minVersion": "string",
+      "dataRequirements": {
+        "v1": {
+          "referrer": {
+            "requirement": "REQUIRED",
+            "confirmNeedsAnalysisConducted": {
+              "requirement": "REQUIRED"
+            },
+            "confirmTargetMarketAssessed": {
+              "requirement": "REQUIRED"
+            },
+            "confirmTerms": {
+              "requirement": "REQUIRED",
+              "terms": [
+                {
+                  "displayName": "string",
+                  "termId": "string",
+                  "uri": "string",
+                  "mimeType": "string"
+                }
+              ]
+            }
+          },
+          "applicants": {
+            "requirement": "REQUIRED"
+          },
+          "products": {
+            "requirement": "REQUIRED"
+          },
+          "income": {
+            "requirement": "REQUIRED"
+          },
+          "expenses": {
+            "requirement": "REQUIRED"
+          },
+          "assets": {
+            "requirement": "REQUIRED"
+          },
+          "liabilities": {
+            "requirement": "REQUIRED"
+          },
+          "cdrData": {
+            "requirement": "REQUIRED",
+            "cdrAccounts": {
+              "requirement": "REQUIRED"
+            },
+            "cdrAccountDetails": {
+              "requirement": "REQUIRED"
+            },
+            "cdrBalances": {
+              "requirement": "REQUIRED"
+            },
+            "cdrCustomerDetails": {
+              "requirement": "REQUIRED"
+            }
+          }
+        }
+      }
+    }
   },
   "links": {
     "self": "string"
@@ -180,20 +305,9 @@ This operation does not require authentication
 |---|---|---|---|---|
 |data|object|true|none|none|
 |» schemeUType|string|true|none|The type of origination scheme represented|
-|» lixi1|object|false|none|Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'|
-|» lixi2|object|false|none|Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'|
-|»» baseUri|string|true|none|Base path used to access the LIXI2 gateway|
-|»» lixiCode|string|true|none|The LIXI participant code, assigned by LIXI, for the receiving organisation|
-|»» lixiVersion|string|true|none|The supported version of the LIXI2 schema|
-|»» lixiCustomVersion|string|false|none|Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema|
-|»» apiVersion|string|false|none|Optional version of an API schema definition|
-|»» productCodeMappings|[object]|false|none|Optional mapping of CDR product IDs to product codes used in LIXI applications via this origination scheme.  If absent, or if a mapping is not included, then the CDR product ID is expected to be used as the LIXI product code|
-|»»» productId|string|true|none|The CDR product ID to map from|
-|»»» productCode|string|true|none|The LIXI product code to map to|
-|»» schematronUri|string|false|none|Optional reference to a Schematron file indicating the valid use of this LIXI gateway|
-|»» apiSpecificationUri|string|false|none|Optional reference to an Open API Specification file describing the API version specified in the 'apiVersion' field|
-|»» customVersionUri|string|false|none|Optional reference to additional information describing the customisations and extensions make to the LIXI scheams|
-|» cdrApplyForBankAccountV1|object|false|none|Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'|
+|» lixi1|[Lixi1OriginationSchemeModelV1](#schemalixi1originationschememodelv1)|false|none|Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'|
+|» lixi2|[Lixi2OriginationSchemeModelV1](#schemalixi2originationschememodelv1)|false|none|Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'|
+|» cdrApplyForBankAccountV1|[CdrOriginationSchemeModelV1](#schemacdroriginationschememodelv1)|false|none|Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'|
 |links|[Links](#schemalinks)|true|none|none|
 |meta|[Meta](#schemameta)|true|none|none|
 
@@ -205,9 +319,12 @@ This operation does not require authentication
 |schemeUType|lixi2|
 |schemeUType|cdrApplyForBankAccountV1|
 
-<h2 id="tocSresponseerrorlistv2">ResponseErrorListV2</h2>
-
+<h2 id="tocS_ResponseErrorListV2">ResponseErrorListV2</h2>
+<!-- backwards compatibility -->
 <a id="schemaresponseerrorlistv2"></a>
+<a id="schema_ResponseErrorListV2"></a>
+<a id="tocSresponseerrorlistv2"></a>
+<a id="tocsresponseerrorlistv2"></a>
 
 ```json
 {
@@ -235,9 +352,274 @@ This operation does not require authentication
 |» detail|string|true|none|A human-readable explanation specific to this occurrence of the problem.|
 |» meta|[MetaError](#schemametaerror)|false|none|Additional data for customised error codes|
 
-<h2 id="tocSlinks">Links</h2>
+<h2 id="tocS_Lixi1OriginationSchemeModelV1">Lixi1OriginationSchemeModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemalixi1originationschememodelv1"></a>
+<a id="schema_Lixi1OriginationSchemeModelV1"></a>
+<a id="tocSlixi1originationschememodelv1"></a>
+<a id="tocslixi1originationschememodelv1"></a>
 
+```json
+{}
+
+```
+
+Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'
+
+### Properties
+
+*None*
+
+<h2 id="tocS_Lixi2OriginationSchemeModelV1">Lixi2OriginationSchemeModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemalixi2originationschememodelv1"></a>
+<a id="schema_Lixi2OriginationSchemeModelV1"></a>
+<a id="tocSlixi2originationschememodelv1"></a>
+<a id="tocslixi2originationschememodelv1"></a>
+
+```json
+{
+  "baseUri": "string",
+  "lixiCode": "string",
+  "lixiVersion": "string",
+  "lixiCustomVersion": "string",
+  "apiVersion": "string",
+  "productCodeMappings": [
+    {
+      "productId": "string",
+      "productCode": "string"
+    }
+  ],
+  "schematronUri": "string",
+  "apiSpecificationUri": "string",
+  "customVersionUri": "string"
+}
+
+```
+
+Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|baseUri|string|true|none|Base path used to access the LIXI2 gateway|
+|lixiCode|string|true|none|The LIXI participant code, assigned by LIXI, for the receiving organisation|
+|lixiVersion|string|true|none|The supported version of the LIXI2 schema|
+|lixiCustomVersion|string|false|none|Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema|
+|apiVersion|string|false|none|Optional version of an API schema definition|
+|productCodeMappings|[object]|false|none|Optional mapping of CDR product IDs to product codes used in LIXI applications via this origination scheme.  If absent, or if a mapping is not included, then the CDR product ID is expected to be used as the LIXI product code|
+|» productId|string|true|none|The CDR product ID to map from|
+|» productCode|string|true|none|The LIXI product code to map to|
+|schematronUri|string|false|none|Optional reference to a Schematron file indicating the valid use of this LIXI gateway|
+|apiSpecificationUri|string|false|none|Optional reference to an Open API Specification file describing the API version specified in the 'apiVersion' field|
+|customVersionUri|string|false|none|Optional reference to additional information describing the customisations and extensions make to the LIXI scheams|
+
+<h2 id="tocS_CdrOriginationSchemeModelV1">CdrOriginationSchemeModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemacdroriginationschememodelv1"></a>
+<a id="schema_CdrOriginationSchemeModelV1"></a>
+<a id="tocScdroriginationschememodelv1"></a>
+<a id="tocscdroriginationschememodelv1"></a>
+
+```json
+{
+  "version": "string",
+  "minVersion": "string",
+  "dataRequirements": {
+    "v1": {
+      "referrer": {
+        "requirement": "REQUIRED",
+        "confirmNeedsAnalysisConducted": {
+          "requirement": "REQUIRED"
+        },
+        "confirmTargetMarketAssessed": {
+          "requirement": "REQUIRED"
+        },
+        "confirmTerms": {
+          "requirement": "REQUIRED",
+          "terms": [
+            {
+              "displayName": "string",
+              "termId": "string",
+              "uri": "string",
+              "mimeType": "string"
+            }
+          ]
+        }
+      },
+      "applicants": {
+        "requirement": "REQUIRED"
+      },
+      "products": {
+        "requirement": "REQUIRED"
+      },
+      "income": {
+        "requirement": "REQUIRED"
+      },
+      "expenses": {
+        "requirement": "REQUIRED"
+      },
+      "assets": {
+        "requirement": "REQUIRED"
+      },
+      "liabilities": {
+        "requirement": "REQUIRED"
+      },
+      "cdrData": {
+        "requirement": "REQUIRED",
+        "cdrAccounts": {
+          "requirement": "REQUIRED"
+        },
+        "cdrAccountDetails": {
+          "requirement": "REQUIRED"
+        },
+        "cdrBalances": {
+          "requirement": "REQUIRED"
+        },
+        "cdrCustomerDetails": {
+          "requirement": "REQUIRED"
+        }
+      }
+    }
+  }
+}
+
+```
+
+Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|version|string|true|none|none|
+|minVersion|string|false|none|The lowest version of the `Apply For Bank Account` endpoint currently supported if different from `version`|
+|dataRequirements|object|true|none|The data objects supported by the `Apply For Bank Account` that are expected to be populated for this origination scheme, specified according to endpoint version.  An entry for each version between `version` and `minVersion` (inclusive) is expected to be included|
+|» v1|object|false|none|Data requirements when calling v1 of the `Apply For Bank Account` endpoint|
+|»» referrer|any|false|none|none|
+
+allOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»» *anonymous*|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+
+and
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»» *anonymous*|object|false|none|none|
+|»»»» confirmNeedsAnalysisConducted|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»»»» confirmTargetMarketAssessed|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»»»» confirmTerms|any|false|none|none|
+
+allOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»» *anonymous*|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+
+and
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»» *anonymous*|object|false|none|none|
+|»»»»»» terms|[TermsModelV1](#schematermsmodelv1)|false|none|One or more statements that the customer must agree to for the origination process to be completed|
+
+continued
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»» applicants|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»» products|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»» income|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»» expenses|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»» assets|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»» liabilities|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»» cdrData|any|false|none|none|
+
+allOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»» *anonymous*|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+
+and
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»» *anonymous*|object|false|none|none|
+|»»»» cdrAccounts|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»»»» cdrAccountDetails|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»»»» cdrBalances|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»»»» cdrCustomerDetails|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+
+<h2 id="tocS_DataRequirementModelV1">DataRequirementModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemadatarequirementmodelv1"></a>
+<a id="schema_DataRequirementModelV1"></a>
+<a id="tocSdatarequirementmodelv1"></a>
+<a id="tocsdatarequirementmodelv1"></a>
+
+```json
+{
+  "requirement": "REQUIRED"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|requirement|string|true|none|Indicate whether the specific data set or field is required or not for the application.  Valid options are:<br>* REQUIRED - This data set is required for an application to be accepted<br>* PREFERRED - This data is needed for completion of the origination process but an application will be accepted without it<br>* OPTIONAL - This data can be accepted but and will assist in the origination process<br>* NOT_SUPPORTED - This data should not be sent as it will not be used|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|requirement|REQUIRED|
+|requirement|PREFERRED|
+|requirement|OPTIONAL|
+|requirement|NOT_SUPPORTED|
+
+<h2 id="tocS_TermsModelV1">TermsModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schematermsmodelv1"></a>
+<a id="schema_TermsModelV1"></a>
+<a id="tocStermsmodelv1"></a>
+<a id="tocstermsmodelv1"></a>
+
+```json
+[
+  {
+    "displayName": "string",
+    "termId": "string",
+    "uri": "string",
+    "mimeType": "string"
+  }
+]
+
+```
+
+One or more statements that the customer must agree to for the origination process to be completed
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|displayName|string|true|none|The display name of the terms to be presented to the customer|
+|termId|string|true|none|Unique identifier of the terms to be used to report acceptance|
+|uri|string|true|none|Path to the contact for the terms and conditions to present to the customer|
+|mimeType|string|true|none|Mime type that the terms will be provided in so that the client can determine how best to display the content to the customer|
+
+<h2 id="tocS_Links">Links</h2>
+<!-- backwards compatibility -->
 <a id="schemalinks"></a>
+<a id="schema_Links"></a>
+<a id="tocSlinks"></a>
+<a id="tocslinks"></a>
 
 ```json
 {
@@ -252,9 +634,12 @@ This operation does not require authentication
 |---|---|---|---|---|
 |self|string|true|none|Fully qualified link that generated the current response document|
 
-<h2 id="tocSmeta">Meta</h2>
-
+<h2 id="tocS_Meta">Meta</h2>
+<!-- backwards compatibility -->
 <a id="schemameta"></a>
+<a id="schema_Meta"></a>
+<a id="tocSmeta"></a>
+<a id="tocsmeta"></a>
 
 ```json
 {}
@@ -265,9 +650,12 @@ This operation does not require authentication
 
 *None*
 
-<h2 id="tocSlinkspaginated">LinksPaginated</h2>
-
+<h2 id="tocS_LinksPaginated">LinksPaginated</h2>
+<!-- backwards compatibility -->
 <a id="schemalinkspaginated"></a>
+<a id="schema_LinksPaginated"></a>
+<a id="tocSlinkspaginated"></a>
+<a id="tocslinkspaginated"></a>
 
 ```json
 {
@@ -290,9 +678,12 @@ This operation does not require authentication
 |next|string|false|none|URI to the next page of this set. Mandatory if this response is not the last page|
 |last|string|false|none|URI to the last page of this set. Mandatory if this response is not the last page|
 
-<h2 id="tocSmetapaginated">MetaPaginated</h2>
-
+<h2 id="tocS_MetaPaginated">MetaPaginated</h2>
+<!-- backwards compatibility -->
 <a id="schemametapaginated"></a>
+<a id="schema_MetaPaginated"></a>
+<a id="tocSmetapaginated"></a>
+<a id="tocsmetapaginated"></a>
 
 ```json
 {
@@ -309,9 +700,12 @@ This operation does not require authentication
 |totalRecords|integer|true|none|The total number of records in the full set. See [pagination](#pagination).|
 |totalPages|integer|true|none|The total number of pages in the full set. See [pagination](#pagination).|
 
-<h2 id="tocSmetaerror">MetaError</h2>
-
+<h2 id="tocS_MetaError">MetaError</h2>
+<!-- backwards compatibility -->
 <a id="schemametaerror"></a>
+<a id="schema_MetaError"></a>
+<a id="tocSmetaerror"></a>
+<a id="tocsmetaerror"></a>
 
 ```json
 {
@@ -320,7 +714,7 @@ This operation does not require authentication
 
 ```
 
-*Additional data for customised error codes*
+Additional data for customised error codes
 
 ### Properties
 

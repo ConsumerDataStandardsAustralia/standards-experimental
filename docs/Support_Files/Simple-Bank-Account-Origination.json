@@ -12,7 +12,7 @@
             "url": "https://opensource.org/licenses/MIT"
         },
         "title": "CDR Experimantal Simple Bank Account Origination API",
-        "version": "0.0.4"
+        "version": "0.0.5"
     },
     "servers": [
         {
@@ -231,84 +231,13 @@
                                 ]
                             },
                             "lixi1": {
-                                "type": "object",
-                                "description": "Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'",
-                                "properties": {}
+                                "$ref": "#/components/schemas/Lixi1OriginationSchemeModelV1"
                             },
                             "lixi2": {
-                                "type": "object",
-                                "description": "Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'",
-                                "required": [
-                                    "baseUri",
-                                    "lixiCode",
-                                    "lixiVersion"
-                                ],
-                                "properties": {
-                                    "baseUri": {
-                                        "type": "string",
-                                        "description": "Base path used to access the LIXI2 gateway",
-                                        "x-cds-type": "URIString"
-                                    },
-                                    "lixiCode": {
-                                        "type": "string",
-                                        "description": "The LIXI participant code, assigned by LIXI, for the receiving organisation"
-                                    },
-                                    "lixiVersion": {
-                                        "type": "string",
-                                        "description": "The supported version of the LIXI2 schema"
-                                    },
-                                    "lixiCustomVersion": {
-                                        "type": "string",
-                                        "description": "Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema"
-                                    },
-                                    "apiVersion": {
-                                        "type": "string",
-                                        "description": "Optional version of an API schema definition"
-                                    },
-                                    "productCodeMappings": {
-                                        "type": "array",
-                                        "description": "Optional mapping of CDR product IDs to product codes used in LIXI applications via this origination scheme.  If absent, or if a mapping is not included, then the CDR product ID is expected to be used as the LIXI product code",
-                                        "items": {
-                                            "required": [
-                                                "productId",
-                                                "productCode"
-                                            ],
-                                            "type": "object",
-                                            "properties": {
-                                                "productId": {
-                                                    "type": "string",
-                                                    "description": "The CDR product ID to map from"
-                                                },
-                                                "productCode": {
-                                                    "type": "string",
-                                                    "description": "The LIXI product code to map to"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "schematronUri": {
-                                        "type": "string",
-                                        "description": "Optional reference to a Schematron file indicating the valid use of this LIXI gateway",
-                                        "x-cds-type": "URIString"
-                                    },
-                                    "apiSpecificationUri": {
-                                        "type": "string",
-                                        "description": "Optional reference to an Open API Specification file describing the API version specified in the 'apiVersion' field",
-                                        "x-cds-type": "URIString"
-                                    },
-                                    "customVersionUri": {
-                                        "type": "string",
-                                        "description": "Optional reference to additional information describing the customisations and extensions make to the LIXI scheams",
-                                        "x-cds-type": "URIString"
-                                    }
-                                }
+                                "$ref": "#/components/schemas/Lixi2OriginationSchemeModelV1"
                             },
                             "cdrApplyForBankAccountV1": {
-                                "type": "object",
-                                "description": "Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'",
-                                "required": [
-                                ],
-                                "properties": {}
+                                "$ref": "#/components/schemas/CdrOriginationSchemeModelV1"
                             }
                         }
                     },
@@ -359,6 +288,234 @@
                 "x-conditional": [
                     "meta"
                 ]
+            },
+            "Lixi1OriginationSchemeModelV1": {
+                "type": "object",
+                "description": "Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'",
+                "properties": {}
+            },
+            "Lixi2OriginationSchemeModelV1": {
+                "type": "object",
+                "description": "Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'",
+                "required": [
+                    "baseUri",
+                    "lixiCode",
+                    "lixiVersion"
+                ],
+                "properties": {
+                    "baseUri": {
+                        "type": "string",
+                        "description": "Base path used to access the LIXI2 gateway",
+                        "x-cds-type": "URIString"
+                    },
+                    "lixiCode": {
+                        "type": "string",
+                        "description": "The LIXI participant code, assigned by LIXI, for the receiving organisation"
+                    },
+                    "lixiVersion": {
+                        "type": "string",
+                        "description": "The supported version of the LIXI2 schema"
+                    },
+                    "lixiCustomVersion": {
+                        "type": "string",
+                        "description": "Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema"
+                    },
+                    "apiVersion": {
+                        "type": "string",
+                        "description": "Optional version of an API schema definition"
+                    },
+                    "productCodeMappings": {
+                        "type": "array",
+                        "description": "Optional mapping of CDR product IDs to product codes used in LIXI applications via this origination scheme.  If absent, or if a mapping is not included, then the CDR product ID is expected to be used as the LIXI product code",
+                        "items": {
+                            "required": [
+                                "productId",
+                                "productCode"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "productId": {
+                                    "type": "string",
+                                    "description": "The CDR product ID to map from"
+                                },
+                                "productCode": {
+                                    "type": "string",
+                                    "description": "The LIXI product code to map to"
+                                }
+                            }
+                        }
+                    },
+                    "schematronUri": {
+                        "type": "string",
+                        "description": "Optional reference to a Schematron file indicating the valid use of this LIXI gateway",
+                        "x-cds-type": "URIString"
+                    },
+                    "apiSpecificationUri": {
+                        "type": "string",
+                        "description": "Optional reference to an Open API Specification file describing the API version specified in the 'apiVersion' field",
+                        "x-cds-type": "URIString"
+                    },
+                    "customVersionUri": {
+                        "type": "string",
+                        "description": "Optional reference to additional information describing the customisations and extensions make to the LIXI scheams",
+                        "x-cds-type": "URIString"
+                    }
+                }
+            },
+            "CdrOriginationSchemeModelV1": {
+                "type": "object",
+                "description": "Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'",
+                "required": [
+                    "version",
+                    "dataRequirements"
+                ],
+                "properties": {
+                    "version": {
+                        "type": "string",
+                        "descroiption": "The highest version of the `Apply For Bank Account` endpoint currently supported"
+                    },
+                    "minVersion": {
+                        "type": "string",
+                        "description": "The lowest version of the `Apply For Bank Account` endpoint currently supported if different from `version`"
+                    },
+                    "dataRequirements": {
+                        "type": "object",
+                        "description": "The data objects supported by the `Apply For Bank Account` that are expected to be populated for this origination scheme, specified according to endpoint version.  An entry for each version between `version` and `minVersion` (inclusive) is expected to be included",
+                        "properties": {
+                            "v1": {
+                                "type": "object",
+                                "description": "Data requirements when calling v1 of the `Apply For Bank Account` endpoint",
+                                "properties": {
+                                    "referrer": {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/DataRequirementModelV1"
+                                            },
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "confirmNeedsAnalysisConducted": {
+                                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                    },
+                                                    "confirmTargetMarketAssessed": {
+                                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                    },
+                                                    "confirmTerms": {
+                                                        "allOf": [
+                                                            {
+                                                                "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                            },
+                                                            {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "terms": {
+                                                                        "$ref": "#/components/schemas/TermsModelV1"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "applicants": {
+                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                    },
+                                    "products": {
+                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                    },
+                                    "income": {
+                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                    },
+                                    "expenses": {
+                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                    },
+                                    "assets": {
+                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                    },
+                                    "liabilities": {
+                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                    },
+                                    "cdrData": {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/DataRequirementModelV1"
+                                            },
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "cdrAccounts": {
+                                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                    },
+                                                    "cdrAccountDetails": {
+                                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                    },
+                                                    "cdrBalances": {
+                                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                    },
+                                                    "cdrCustomerDetails": {
+                                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "DataRequirementModelV1": {
+                "type": "object",
+                "required": [
+                    "requirement"
+                ],
+                "properties": {
+                    "requirement": {
+                        "type": "string",
+                        "description": "Indicate whether the specific data set or field is required or not for the application.  Valid options are:\n* REQUIRED - This data set is required for an application to be accepted\n* PREFERRED - This data is needed for completion of the origination process but an application will be accepted without it\n* OPTIONAL - This data can be accepted but and will assist in the origination process\n* NOT_SUPPORTED - This data should not be sent as it will not be used",
+                        "enum": [
+                            "REQUIRED",
+                            "PREFERRED",
+                            "OPTIONAL",
+                            "NOT_SUPPORTED"
+                        ]
+                    }
+                }
+            },
+            "TermsModelV1": {
+                "type": "array",
+                "description": "One or more statements that the customer must agree to for the origination process to be completed",
+                "items": {
+                    "type": "object",
+                    "required": [
+                        "displayName",
+                        "termId",
+                        "uri",
+                        "mimeType"
+                    ],
+                    "properties": {
+                        "displayName": {
+                            "type": "string",
+                            "description": "The display name of the terms to be presented to the customer"
+                        },
+                        "termId": {
+                            "type": "string",
+                            "description": "Unique identifier of the terms to be used to report acceptance"
+                        },
+                        "uri": {
+                            "type": "string",
+                            "description": "Path to the contact for the terms and conditions to present to the customer",
+                            "x-cds-type": "URIString"
+                        },
+                        "mimeType": {
+                            "type": "string",
+                            "description": "Mime type that the terms will be provided in so that the client can determine how best to display the content to the customer"
+                        }
+                    }
+                }
             },
             "Links": {
                 "properties": {
