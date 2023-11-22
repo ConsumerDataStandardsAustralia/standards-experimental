@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.5</h1>
+<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.6</h1>
 
 > Scroll down for example requests and responses.
 
@@ -111,6 +111,9 @@ Obtain the meta data describing how to make an application for a family of produ
             "cdrBalances": {
               "requirement": "REQUIRED"
             },
+            "cdrTransactions": {
+              "requirement": "REQUIRED"
+            },
             "cdrCustomerDetails": {
               "requirement": "REQUIRED"
             }
@@ -158,7 +161,59 @@ Submit an application, on behalf of a consumer, to apply for an account to be or
 > Body parameter
 
 ```json
-null
+{
+  "data": {
+    "applicants": null,
+    "products": null,
+    "income": null,
+    "expenses": null,
+    "assets": null,
+    "liabilities": null,
+    "cdrData": {
+      "cdrAccounts": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrAccountDetails": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrBalances": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrTransactions": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrCustomerDetails": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ]
+    }
+  },
+  "meta": {}
+}
 ```
 
 <h3 id="applyforaccount-parameters">Parameters</h3>
@@ -167,26 +222,47 @@ null
 |---|---|---|---|---|
 |x-v|header|string|true|Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)|
 |x-min-v|header|string|false|Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.|
-|body|body|any|true|Application data provided in accordance to a defined origination scheme|
+|body|body|[ApplyForBankAccountRequestV1](#schemaapplyforbankaccountrequestv1)|true|Application data provided in accordance to a defined origination scheme|
 
 > Example responses
 
 > 200 Response
 
 ```json
-null
+{
+  "data": {
+    "applicationStatus": "REJECTED",
+    "applicationId": "string",
+    "nextStep": "NONE",
+    "rejectionReasons": [
+      {
+        "code": "REFERRER_UNKNOWN",
+        "message": "string",
+        "detail": {
+          "property1": "string",
+          "property2": "string"
+        },
+        "mimeType": "string"
+      }
+    ],
+    "redirectUri": "string",
+    "applicantMessage": "string"
+  },
+  "links": {
+    "self": "string"
+  },
+  "meta": {}
+}
 ```
 
 <h3 id="applyforaccount-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful response|[ApplyForBankAccountResponseV1](#schemaapplyforbankaccountresponsev1)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|The following error codes MUST be supported:<br/><ul class="error-code-list"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Field](#error-400-field-missing)</li><li>[400 - Invalid Page Size](#error-400-field-invalid-page-size)</li><li>[400 - Invalid Version](#error-400-header-invalid-version)</li></ul>|[ResponseErrorListV2](#schemaresponseerrorlistv2)|
 |406|[Not Acceptable](https://tools.ietf.org/html/rfc7231#section-6.5.6)|The following error codes MUST be supported:<br/><ul class="error-code-list"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>|[ResponseErrorListV2](#schemaresponseerrorlistv2)|
 |422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|The following error codes MUST be supported:<br/><ul class="error-code-list"><li>[422 - Invalid Page](#error-422-field-invalid-page)</li></ul>|[ResponseErrorListV2](#schemaresponseerrorlistv2)|
-
-<h3 id="applyforaccount-responseschema">Response Schema</h3>
 
 ### Response Headers
 
@@ -199,6 +275,89 @@ This operation does not require authentication
 </aside>
 
 # Schemas
+
+<h2 id="tocS_ApplyForBankAccountRequestV1">ApplyForBankAccountRequestV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaapplyforbankaccountrequestv1"></a>
+<a id="schema_ApplyForBankAccountRequestV1"></a>
+<a id="tocSapplyforbankaccountrequestv1"></a>
+<a id="tocsapplyforbankaccountrequestv1"></a>
+
+```json
+{
+  "data": {
+    "applicants": null,
+    "products": null,
+    "income": null,
+    "expenses": null,
+    "assets": null,
+    "liabilities": null,
+    "cdrData": {
+      "cdrAccounts": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrAccountDetails": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrBalances": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrTransactions": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ],
+      "cdrCustomerDetails": [
+        {
+          "applicantId": "string",
+          "v": "string",
+          "dataHolderBrandId": "string",
+          "data": {}
+        }
+      ]
+    }
+  },
+  "meta": {}
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|object|true|none|none|
+|» applicants|[ApplicantsModelV1](#schemaapplicantsmodelv1)|false|none|none|
+|» products|[ProductsModelV1](#schemaproductsmodelv1)|false|none|none|
+|» income|[IncomeModelV1](#schemaincomemodelv1)|false|none|none|
+|» expenses|[ExpensesModelV1](#schemaexpensesmodelv1)|false|none|none|
+|» assets|[AssetsModelV1](#schemaassetsmodelv1)|false|none|none|
+|» liabilities|[LiabilitiesModelV1](#schemaliabilitiesmodelv1)|false|none|none|
+|» cdrData|object|false|none|none|
+|»» cdrAccounts|[[CdrPayloadModelV1](#schemacdrpayloadmodelv1)]|false|none|Array of summary account data for an applicant obtained from the CDR|
+|»» cdrAccountDetails|[[CdrPayloadModelV1](#schemacdrpayloadmodelv1)]|false|none|Array of detailed account data for an applicant obtained from the CDR|
+|»» cdrBalances|[[CdrPayloadModelV1](#schemacdrpayloadmodelv1)]|false|none|Array of account balance data for an applicant obtained from the CDR|
+|»» cdrTransactions|[[CdrPayloadModelV1](#schemacdrpayloadmodelv1)]|false|none|Array of transaction data for an applicant obtained from the CDR|
+|»» cdrCustomerDetails|[[CdrPayloadModelV1](#schemacdrpayloadmodelv1)]|false|none|Array of customer detail data for an applicant obtained from the CDR|
+|meta|[Meta](#schemameta)|true|none|none|
 
 <h2 id="tocS_OriginationSchemeResponseV1">OriginationSchemeResponseV1</h2>
 <!-- backwards compatibility -->
@@ -281,6 +440,9 @@ This operation does not require authentication
             "cdrBalances": {
               "requirement": "REQUIRED"
             },
+            "cdrTransactions": {
+              "requirement": "REQUIRED"
+            },
             "cdrCustomerDetails": {
               "requirement": "REQUIRED"
             }
@@ -314,6 +476,68 @@ This operation does not require authentication
 |---|---|
 |schemeUType|lixi2|
 |schemeUType|cdrApplyForBankAccountV1|
+
+<h2 id="tocS_ApplyForBankAccountResponseV1">ApplyForBankAccountResponseV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaapplyforbankaccountresponsev1"></a>
+<a id="schema_ApplyForBankAccountResponseV1"></a>
+<a id="tocSapplyforbankaccountresponsev1"></a>
+<a id="tocsapplyforbankaccountresponsev1"></a>
+
+```json
+{
+  "data": {
+    "applicationStatus": "REJECTED",
+    "applicationId": "string",
+    "nextStep": "NONE",
+    "rejectionReasons": [
+      {
+        "code": "REFERRER_UNKNOWN",
+        "message": "string",
+        "detail": {
+          "property1": "string",
+          "property2": "string"
+        },
+        "mimeType": "string"
+      }
+    ],
+    "redirectUri": "string",
+    "applicantMessage": "string"
+  },
+  "links": {
+    "self": "string"
+  },
+  "meta": {}
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|object|true|none|none|
+|» applicationStatus|string|true|none|The status of the application|
+|» applicationId|string|true|none|Unique reference for this application|
+|» nextStep|string|false|none|The next step that will be taken for this applicagtion|
+|» rejectionReasons|[[RejectionReasonModelV1](#schemarejectionreasonmodelv1)]|false|none|Array of reasons that the application was rejected that need to be rectified before the application will be accepted|
+|» redirectUri|string|false|none|A web page that the customer should be directed to so that the application can be continued|
+|» applicantMessage|string|false|none|An optional message that can be displayed to the applicant to describe the next steps|
+|links|[Links](#schemalinks)|true|none|none|
+|meta|[Meta](#schemameta)|true|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|applicationStatus|REJECTED|
+|applicationStatus|ACCEPTED_COMPLETE|
+|applicationStatus|ACCEPTED_INCOMPLETE|
+|applicationStatus|PENDING_REVIEW|
+|applicationStatus|ACCOUNT_CREATED|
+|nextStep|NONE|
+|nextStep|APPLICANT_CONTACT|
+|nextStep|REDIRECT|
 
 <h2 id="tocS_ResponseErrorListV2">ResponseErrorListV2</h2>
 <!-- backwards compatibility -->
@@ -455,6 +679,9 @@ Provides the metadata for making an application using a LIXI2 gateway. Mandatory
         "cdrBalances": {
           "requirement": "REQUIRED"
         },
+        "cdrTransactions": {
+          "requirement": "REQUIRED"
+        },
         "cdrCustomerDetails": {
           "requirement": "REQUIRED"
         }
@@ -531,6 +758,7 @@ and
 |»»»» cdrAccounts|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
 |»»»» cdrAccountDetails|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
 |»»»» cdrBalances|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
+|»»»» cdrTransactions|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
 |»»»» cdrCustomerDetails|[DataRequirementModelV1](#schemadatarequirementmodelv1)|false|none|none|
 
 <h2 id="tocS_DataRequirementModelV1">DataRequirementModelV1</h2>
@@ -591,6 +819,168 @@ One or more statements that the customer must agree to for the origination proce
 |termId|string|true|none|Unique identifier of the terms to be used to report acceptance|
 |uri|string|true|none|Path to the contact for the terms and conditions to present to the customer|
 |mimeType|string|true|none|Mime type that the terms will be provided in so that the client can determine how best to display the content to the customer|
+
+<h2 id="tocS_RejectionReasonModelV1">RejectionReasonModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemarejectionreasonmodelv1"></a>
+<a id="schema_RejectionReasonModelV1"></a>
+<a id="tocSrejectionreasonmodelv1"></a>
+<a id="tocsrejectionreasonmodelv1"></a>
+
+```json
+{
+  "code": "REFERRER_UNKNOWN",
+  "message": "string",
+  "detail": {
+    "property1": "string",
+    "property2": "string"
+  },
+  "mimeType": "string"
+}
+
+```
+
+A single reason given to explain the rejection of an application
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|code|string|true|none|The reason for the rejection|
+|message|string|true|none|A message describing the rejection|
+|detail|object|true|none|Additional information that is reason type dependent that gives more detail|
+|» **additionalProperties**|string|false|none|none|
+|mimeType|string|false|none|Mime type that the terms will be provided in so that the client can determine how best to display the content to the customer|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|code|REFERRER_UNKNOWN|
+|code|MISSING_DATA|
+|code|NOT_ELIGIBLE|
+
+<h2 id="tocS_ApplicantsModelV1">ApplicantsModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaapplicantsmodelv1"></a>
+<a id="schema_ApplicantsModelV1"></a>
+<a id="tocSapplicantsmodelv1"></a>
+<a id="tocsapplicantsmodelv1"></a>
+
+```json
+null
+
+```
+
+### Properties
+
+*None*
+
+<h2 id="tocS_ProductsModelV1">ProductsModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaproductsmodelv1"></a>
+<a id="schema_ProductsModelV1"></a>
+<a id="tocSproductsmodelv1"></a>
+<a id="tocsproductsmodelv1"></a>
+
+```json
+null
+
+```
+
+### Properties
+
+*None*
+
+<h2 id="tocS_IncomeModelV1">IncomeModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaincomemodelv1"></a>
+<a id="schema_IncomeModelV1"></a>
+<a id="tocSincomemodelv1"></a>
+<a id="tocsincomemodelv1"></a>
+
+```json
+null
+
+```
+
+### Properties
+
+*None*
+
+<h2 id="tocS_ExpensesModelV1">ExpensesModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaexpensesmodelv1"></a>
+<a id="schema_ExpensesModelV1"></a>
+<a id="tocSexpensesmodelv1"></a>
+<a id="tocsexpensesmodelv1"></a>
+
+```json
+null
+
+```
+
+### Properties
+
+*None*
+
+<h2 id="tocS_AssetsModelV1">AssetsModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaassetsmodelv1"></a>
+<a id="schema_AssetsModelV1"></a>
+<a id="tocSassetsmodelv1"></a>
+<a id="tocsassetsmodelv1"></a>
+
+```json
+null
+
+```
+
+### Properties
+
+*None*
+
+<h2 id="tocS_LiabilitiesModelV1">LiabilitiesModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaliabilitiesmodelv1"></a>
+<a id="schema_LiabilitiesModelV1"></a>
+<a id="tocSliabilitiesmodelv1"></a>
+<a id="tocsliabilitiesmodelv1"></a>
+
+```json
+null
+
+```
+
+### Properties
+
+*None*
+
+<h2 id="tocS_CdrPayloadModelV1">CdrPayloadModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemacdrpayloadmodelv1"></a>
+<a id="schema_CdrPayloadModelV1"></a>
+<a id="tocScdrpayloadmodelv1"></a>
+<a id="tocscdrpayloadmodelv1"></a>
+
+```json
+{
+  "applicantId": "string",
+  "v": "string",
+  "dataHolderBrandId": "string",
+  "data": {}
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|applicantId|string|true|none|ID of the applicant in the applicants array that this data relates to|
+|v|string|true|none|The x-v value of the response payload obtained via the CDR|
+|dataHolderBrandId|string|true|none|The data holder brand ID on the CDR Register for the data holder the data was obtained from|
+|data|object|true|none|The actual data obtained via the CDR|
 
 <h2 id="tocS_Links">Links</h2>
 <!-- backwards compatibility -->

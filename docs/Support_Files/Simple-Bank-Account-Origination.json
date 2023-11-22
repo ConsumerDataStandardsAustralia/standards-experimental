@@ -12,7 +12,7 @@
             "url": "https://opensource.org/licenses/MIT"
         },
         "title": "CDR Experimantal Simple Bank Account Origination API",
-        "version": "0.0.5"
+        "version": "0.0.6"
     },
     "servers": [
         {
@@ -118,7 +118,9 @@
                     "description": "Application data provided in accordance to a defined origination scheme",
                     "content": {
                         "application/json": {
-                            "schema": {}
+                            "schema": {
+                                "$ref": "#/components/schemas/ApplyForBankAccountRequestV1"
+                            }
                         }
                     },
                     "required": true
@@ -127,7 +129,9 @@
                     "200": {
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplyForBankAccountResponseV1"
+                                }
                             }
                         },
                         "description": "Successful response",
@@ -200,8 +204,84 @@
                 }
             }
         },
-        "responses": {},
         "schemas": {
+            "ApplyForBankAccountRequestV1": {
+                "required": [
+                    "data",
+                    "meta"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "required": [],
+                        "x-conditional": [],
+                        "type": "object",
+                        "properties": {
+                            "applicants": {
+                                "$ref": "#/components/schemas/ApplicantsModelV1"
+                            },
+                            "products": {
+                                "$ref": "#/components/schemas/ProductsModelV1"
+                            },
+                            "income": {
+                                "$ref": "#/components/schemas/IncomeModelV1"
+                            },
+                            "expenses": {
+                                "$ref": "#/components/schemas/ExpensesModelV1"
+                            },
+                            "assets": {
+                                "$ref": "#/components/schemas/AssetsModelV1"
+                            },
+                            "liabilities": {
+                                "$ref": "#/components/schemas/LiabilitiesModelV1"
+                            },
+                            "cdrData": {
+                                "type": "object",
+                                "properties": {
+                                    "cdrAccounts": {
+                                        "type": "array",
+                                        "description": "Array of summary account data for an applicant obtained from the CDR",
+                                        "items": {
+                                            "$ref": "#/components/schemas/CdrPayloadModelV1"
+                                        }
+                                    },
+                                    "cdrAccountDetails": {
+                                        "type": "array",
+                                        "description": "Array of detailed account data for an applicant obtained from the CDR",
+                                        "items": {
+                                            "$ref": "#/components/schemas/CdrPayloadModelV1"
+                                        }
+                                    },
+                                    "cdrBalances": {
+                                        "type": "array",
+                                        "description": "Array of account balance data for an applicant obtained from the CDR",
+                                        "items": {
+                                            "$ref": "#/components/schemas/CdrPayloadModelV1"
+                                        }
+                                    },
+                                    "cdrTransactions": {
+                                        "type": "array",
+                                        "description": "Array of transaction data for an applicant obtained from the CDR",
+                                        "items": {
+                                            "$ref": "#/components/schemas/CdrPayloadModelV1"
+                                        }
+                                    },
+                                    "cdrCustomerDetails": {
+                                        "type": "array",
+                                        "description": "Array of customer detail data for an applicant obtained from the CDR",
+                                        "items": {
+                                            "$ref": "#/components/schemas/CdrPayloadModelV1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/Meta"
+                    }
+                }
+            },
             "OriginationSchemeResponseV1": {
                 "required": [
                     "data",
@@ -233,6 +313,71 @@
                             },
                             "cdrApplyForBankAccountV1": {
                                 "$ref": "#/components/schemas/CdrOriginationSchemeModelV1"
+                            }
+                        }
+                    },
+                    "links": {
+                        "$ref": "#/components/schemas/Links"
+                    },
+                    "meta": {
+                        "$ref": "#/components/schemas/Meta"
+                    }
+                }
+            },
+            "ApplyForBankAccountResponseV1": {
+                "required": [
+                    "data",
+                    "links",
+                    "meta"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "required": [
+                            "applicationStatus",
+                            "applicationId"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "applicationStatus": {
+                                "type": "string",
+                                "description": "The status of the application",
+                                "enum": [
+                                    "REJECTED",
+                                    "ACCEPTED_COMPLETE",
+                                    "ACCEPTED_INCOMPLETE",
+                                    "PENDING_REVIEW",
+                                    "ACCOUNT_CREATED"
+                                ]
+                            },
+                            "applicationId": {
+                                "type": "string",
+                                "description": "Unique reference for this application"
+                            },
+                            "nextStep": {
+                                "type": "string",
+                                "description": "The next step that will be taken for this applicagtion",
+                                "enum": [
+                                    "NONE",
+                                    "APPLICANT_CONTACT",
+                                    "REDIRECT"
+                                ]
+                            },
+                            "rejectionReasons": {
+                                "type": "array",
+                                "description": "Array of reasons that the application was rejected that need to be rectified before the application will be accepted",
+                                "items": {
+                                    "$ref": "#/components/schemas/RejectionReasonModelV1"
+                                }
+                            },
+                            "redirectUri": {
+                                "type": "string",
+                                "description": "A web page that the customer should be directed to so that the application can be continued",
+                                "x-cds-type": "URIString"
+                            },
+                            "applicantMessage": {
+                                "type": "string",
+                                "description": "An optional message that can be displayed to the applicant to describe the next steps"
                             }
                         }
                     },
@@ -445,6 +590,9 @@
                                                     "cdrBalances": {
                                                         "$ref": "#/components/schemas/DataRequirementModelV1"
                                                     },
+                                                    "cdrTransactions": {
+                                                        "$ref": "#/components/schemas/DataRequirementModelV1"
+                                                    },
                                                     "cdrCustomerDetails": {
                                                         "$ref": "#/components/schemas/DataRequirementModelV1"
                                                     }
@@ -505,6 +653,75 @@
                             "type": "string",
                             "description": "Mime type that the terms will be provided in so that the client can determine how best to display the content to the customer"
                         }
+                    }
+                }
+            },
+            "RejectionReasonModelV1": {
+                "type": "object",
+                "description": "A single reason given to explain the rejection of an application",
+                "required": [
+                    "code",
+                    "message",
+                    "detail"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "The reason for the rejection",
+                        "enum": [
+                            "REFERRER_UNKNOWN",
+                            "MISSING_DATA",
+                            "NOT_ELIGIBLE"
+                        ]
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "A message describing the rejection"
+                    },
+                    "detail": {
+                        "type": "object",
+                        "description": "Additional information that is reason type dependent that gives more detail",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "mimeType": {
+                        "type": "string",
+                        "description": "Mime type that the terms will be provided in so that the client can determine how best to display the content to the customer"
+                    }
+                }
+            },
+            "ApplicantsModelV1": {},
+            "ProductsModelV1": {},
+            "IncomeModelV1": {},
+            "ExpensesModelV1": {},
+            "AssetsModelV1": {},
+            "LiabilitiesModelV1": {},
+            "CdrPayloadModelV1": {
+                "type": "object",
+                "required": [
+                    "applicantId",
+                    "v",
+                    "dataHolderBrandId",
+                    "data"
+                ],
+                "properties": {
+                    "applicantId": {
+                        "type": "string",
+                        "description": "ID of the applicant in the applicants array that this data relates to"
+                    },
+                    "v": {
+                        "type": "string",
+                        "description": "The x-v value of the response payload obtained via the CDR"
+                    },
+                    "dataHolderBrandId": {
+                        "type": "string",
+                        "description": "The data holder brand ID on the CDR Register for the data holder the data was obtained from"
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "The actual data obtained via the CDR",
+                        "additionalProperties": true
                     }
                 }
             },
