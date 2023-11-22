@@ -215,7 +215,6 @@
                             "schemeUType"
                         ],
                         "x-conditional": [
-                            "lixi1",
                             "lixi2",
                             "cdrApplyV1"
                         ],
@@ -225,13 +224,9 @@
                                 "type": "string",
                                 "description": "The type of origination scheme represented",
                                 "enum": [
-                                    "lixi1",
                                     "lixi2",
                                     "cdrApplyForBankAccountV1"
                                 ]
-                            },
-                            "lixi1": {
-                                "$ref": "#/components/schemas/Lixi1OriginationSchemeModelV1"
                             },
                             "lixi2": {
                                 "$ref": "#/components/schemas/Lixi2OriginationSchemeModelV1"
@@ -289,23 +284,23 @@
                     "meta"
                 ]
             },
-            "Lixi1OriginationSchemeModelV1": {
-                "type": "object",
-                "description": "Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'",
-                "properties": {}
-            },
             "Lixi2OriginationSchemeModelV1": {
                 "type": "object",
                 "description": "Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'",
                 "required": [
-                    "baseUri",
+                    "submissionUri",
                     "lixiCode",
                     "lixiVersion"
                 ],
                 "properties": {
-                    "baseUri": {
+                    "submissionUri": {
                         "type": "string",
                         "description": "Base path used to access the LIXI2 gateway",
+                        "x-cds-type": "URIString"
+                    },
+                    "schemaUri": {
+                        "type": "string",
+                        "description": "Location of file describing the supported LIXI schema.  Must be a file ending in .xsd (representing an XSD file) or .json (representing a JSON Schema file)",
                         "x-cds-type": "URIString"
                     },
                     "lixiCode": {
@@ -319,10 +314,6 @@
                     "lixiCustomVersion": {
                         "type": "string",
                         "description": "Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema"
-                    },
-                    "apiVersion": {
-                        "type": "string",
-                        "description": "Optional version of an API schema definition"
                     },
                     "productCodeMappings": {
                         "type": "array",
@@ -352,12 +343,12 @@
                     },
                     "apiSpecificationUri": {
                         "type": "string",
-                        "description": "Optional reference to an Open API Specification file describing the API version specified in the 'apiVersion' field",
+                        "description": "Optional reference to an Open API Specification file describing the submission API",
                         "x-cds-type": "URIString"
                     },
-                    "customVersionUri": {
+                    "additionalInfoUri": {
                         "type": "string",
-                        "description": "Optional reference to additional information describing the customisations and extensions make to the LIXI scheams",
+                        "description": "Optional reference to a web page with additional documention describing the use of the LIXI gateway",
                         "x-cds-type": "URIString"
                     }
                 }

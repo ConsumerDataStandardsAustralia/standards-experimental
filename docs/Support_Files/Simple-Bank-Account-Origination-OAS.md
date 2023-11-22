@@ -40,14 +40,13 @@ Obtain the meta data describing how to make an application for a family of produ
 ```json
 {
   "data": {
-    "schemeUType": "lixi1",
-    "lixi1": {},
+    "schemeUType": "lixi2",
     "lixi2": {
-      "baseUri": "string",
+      "submissionUri": "string",
+      "schemaUri": "string",
       "lixiCode": "string",
       "lixiVersion": "string",
       "lixiCustomVersion": "string",
-      "apiVersion": "string",
       "productCodeMappings": [
         {
           "productId": "string",
@@ -56,7 +55,7 @@ Obtain the meta data describing how to make an application for a family of produ
       ],
       "schematronUri": "string",
       "apiSpecificationUri": "string",
-      "customVersionUri": "string"
+      "additionalInfoUri": "string"
     },
     "cdrApplyForBankAccountV1": {
       "version": "string",
@@ -211,14 +210,13 @@ This operation does not require authentication
 ```json
 {
   "data": {
-    "schemeUType": "lixi1",
-    "lixi1": {},
+    "schemeUType": "lixi2",
     "lixi2": {
-      "baseUri": "string",
+      "submissionUri": "string",
+      "schemaUri": "string",
       "lixiCode": "string",
       "lixiVersion": "string",
       "lixiCustomVersion": "string",
-      "apiVersion": "string",
       "productCodeMappings": [
         {
           "productId": "string",
@@ -227,7 +225,7 @@ This operation does not require authentication
       ],
       "schematronUri": "string",
       "apiSpecificationUri": "string",
-      "customVersionUri": "string"
+      "additionalInfoUri": "string"
     },
     "cdrApplyForBankAccountV1": {
       "version": "string",
@@ -305,7 +303,6 @@ This operation does not require authentication
 |---|---|---|---|---|
 |data|object|true|none|none|
 |» schemeUType|string|true|none|The type of origination scheme represented|
-|» lixi1|[Lixi1OriginationSchemeModelV1](#schemalixi1originationschememodelv1)|false|none|Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'|
 |» lixi2|[Lixi2OriginationSchemeModelV1](#schemalixi2originationschememodelv1)|false|none|Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'|
 |» cdrApplyForBankAccountV1|[CdrOriginationSchemeModelV1](#schemacdroriginationschememodelv1)|false|none|Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'|
 |links|[Links](#schemalinks)|true|none|none|
@@ -315,7 +312,6 @@ This operation does not require authentication
 
 |Property|Value|
 |---|---|
-|schemeUType|lixi1|
 |schemeUType|lixi2|
 |schemeUType|cdrApplyForBankAccountV1|
 
@@ -352,24 +348,6 @@ This operation does not require authentication
 |» detail|string|true|none|A human-readable explanation specific to this occurrence of the problem.|
 |» meta|[MetaError](#schemametaerror)|false|none|Additional data for customised error codes|
 
-<h2 id="tocS_Lixi1OriginationSchemeModelV1">Lixi1OriginationSchemeModelV1</h2>
-<!-- backwards compatibility -->
-<a id="schemalixi1originationschememodelv1"></a>
-<a id="schema_Lixi1OriginationSchemeModelV1"></a>
-<a id="tocSlixi1originationschememodelv1"></a>
-<a id="tocslixi1originationschememodelv1"></a>
-
-```json
-{}
-
-```
-
-Provides the metadata for making an application using a LIXI1 gateway. Mandatory if schemeUType is set to 'lixi1'
-
-### Properties
-
-*None*
-
 <h2 id="tocS_Lixi2OriginationSchemeModelV1">Lixi2OriginationSchemeModelV1</h2>
 <!-- backwards compatibility -->
 <a id="schemalixi2originationschememodelv1"></a>
@@ -379,11 +357,11 @@ Provides the metadata for making an application using a LIXI1 gateway. Mandatory
 
 ```json
 {
-  "baseUri": "string",
+  "submissionUri": "string",
+  "schemaUri": "string",
   "lixiCode": "string",
   "lixiVersion": "string",
   "lixiCustomVersion": "string",
-  "apiVersion": "string",
   "productCodeMappings": [
     {
       "productId": "string",
@@ -392,7 +370,7 @@ Provides the metadata for making an application using a LIXI1 gateway. Mandatory
   ],
   "schematronUri": "string",
   "apiSpecificationUri": "string",
-  "customVersionUri": "string"
+  "additionalInfoUri": "string"
 }
 
 ```
@@ -403,17 +381,17 @@ Provides the metadata for making an application using a LIXI2 gateway. Mandatory
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|baseUri|string|true|none|Base path used to access the LIXI2 gateway|
+|submissionUri|string|true|none|Base path used to access the LIXI2 gateway|
+|schemaUri|string|false|none|Location of file describing the supported LIXI schema.  Must be a file ending in .xsd (representing an XSD file) or .json (representing a JSON Schema file)|
 |lixiCode|string|true|none|The LIXI participant code, assigned by LIXI, for the receiving organisation|
 |lixiVersion|string|true|none|The supported version of the LIXI2 schema|
 |lixiCustomVersion|string|false|none|Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema|
-|apiVersion|string|false|none|Optional version of an API schema definition|
 |productCodeMappings|[object]|false|none|Optional mapping of CDR product IDs to product codes used in LIXI applications via this origination scheme.  If absent, or if a mapping is not included, then the CDR product ID is expected to be used as the LIXI product code|
 |» productId|string|true|none|The CDR product ID to map from|
 |» productCode|string|true|none|The LIXI product code to map to|
 |schematronUri|string|false|none|Optional reference to a Schematron file indicating the valid use of this LIXI gateway|
-|apiSpecificationUri|string|false|none|Optional reference to an Open API Specification file describing the API version specified in the 'apiVersion' field|
-|customVersionUri|string|false|none|Optional reference to additional information describing the customisations and extensions make to the LIXI scheams|
+|apiSpecificationUri|string|false|none|Optional reference to an Open API Specification file describing the submission API|
+|additionalInfoUri|string|false|none|Optional reference to a web page with additional documention describing the use of the LIXI gateway|
 
 <h2 id="tocS_CdrOriginationSchemeModelV1">CdrOriginationSchemeModelV1</h2>
 <!-- backwards compatibility -->
