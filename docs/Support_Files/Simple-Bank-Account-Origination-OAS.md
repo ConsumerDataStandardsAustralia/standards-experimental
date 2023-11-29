@@ -40,8 +40,8 @@ Obtain the meta data describing how to make an application for a family of produ
 ```json
 {
   "data": {
-    "schemeUType": "lixi2",
-    "lixi2": {
+    "schemeUType": "lixi",
+    "lixi": {
       "submissionUri": "string",
       "schemaUri": "string",
       "lixiCode": "string",
@@ -369,8 +369,8 @@ This operation does not require authentication
 ```json
 {
   "data": {
-    "schemeUType": "lixi2",
-    "lixi2": {
+    "schemeUType": "lixi",
+    "lixi": {
       "submissionUri": "string",
       "schemaUri": "string",
       "lixiCode": "string",
@@ -465,7 +465,7 @@ This operation does not require authentication
 |---|---|---|---|---|
 |data|object|true|none|none|
 |» schemeUType|string|true|none|The type of origination scheme represented|
-|» lixi2|[Lixi2OriginationSchemeModelV1](#schemalixi2originationschememodelv1)|false|none|Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'|
+|» lixi|[LixiOriginationSchemeModelV1](#schemalixioriginationschememodelv1)|false|none|Provides the metadata for making an application using a LIXI gateway. Mandatory if schemeUType is set to 'lixi'|
 |» cdrApplyForBankAccountV1|[CdrOriginationSchemeModelV1](#schemacdroriginationschememodelv1)|false|none|Provides the metadata for making an application using version 1 of the CDR 'Apply For Bank Account' endpoint. Mandatory if schemeUType is set to 'cdrApplyForBankAccountV1'|
 |links|[Links](#schemalinks)|true|none|none|
 |meta|[Meta](#schemameta)|true|none|none|
@@ -474,7 +474,7 @@ This operation does not require authentication
 
 |Property|Value|
 |---|---|
-|schemeUType|lixi2|
+|schemeUType|lixi|
 |schemeUType|cdrApplyForBankAccountV1|
 
 <h2 id="tocS_ApplyForBankAccountResponseV1">ApplyForBankAccountResponseV1</h2>
@@ -572,12 +572,12 @@ This operation does not require authentication
 |» detail|string|true|none|A human-readable explanation specific to this occurrence of the problem.|
 |» meta|[MetaError](#schemametaerror)|false|none|Additional data for customised error codes|
 
-<h2 id="tocS_Lixi2OriginationSchemeModelV1">Lixi2OriginationSchemeModelV1</h2>
+<h2 id="tocS_LixiOriginationSchemeModelV1">LixiOriginationSchemeModelV1</h2>
 <!-- backwards compatibility -->
-<a id="schemalixi2originationschememodelv1"></a>
-<a id="schema_Lixi2OriginationSchemeModelV1"></a>
-<a id="tocSlixi2originationschememodelv1"></a>
-<a id="tocslixi2originationschememodelv1"></a>
+<a id="schemalixioriginationschememodelv1"></a>
+<a id="schema_LixiOriginationSchemeModelV1"></a>
+<a id="tocSlixioriginationschememodelv1"></a>
+<a id="tocslixioriginationschememodelv1"></a>
 
 ```json
 {
@@ -599,16 +599,16 @@ This operation does not require authentication
 
 ```
 
-Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'
+Provides the metadata for making an application using a LIXI gateway. Mandatory if schemeUType is set to 'lixi'
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|submissionUri|string|true|none|Base path used to access the LIXI2 gateway|
+|submissionUri|string|true|none|Base path used to access the LIXI gateway|
 |schemaUri|string|false|none|Location of file describing the supported LIXI schema.  Must be a file ending in .xsd (representing an XSD file) or .json (representing a JSON Schema file)|
 |lixiCode|string|true|none|The LIXI participant code, assigned by LIXI, for the receiving organisation|
-|lixiVersion|string|true|none|The supported version of the LIXI2 schema|
+|lixiVersion|string|true|none|The supported version of the LIXI schema|
 |lixiCustomVersion|string|false|none|Optional identifier of a custom version of the LIXI payloads that are accepted if the receiving organisation has made custom extensions or modifications to the LIXI schema|
 |productCodeMappings|[object]|false|none|Optional mapping of CDR product IDs to product codes used in LIXI applications via this origination scheme.  If absent, or if a mapping is not included, then the CDR product ID is expected to be used as the LIXI product code|
 |» productId|string|true|none|The CDR product ID to map from|

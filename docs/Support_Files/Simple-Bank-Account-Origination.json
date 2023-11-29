@@ -295,7 +295,7 @@
                             "schemeUType"
                         ],
                         "x-conditional": [
-                            "lixi2",
+                            "lixi",
                             "cdrApplyV1"
                         ],
                         "type": "object",
@@ -304,12 +304,12 @@
                                 "type": "string",
                                 "description": "The type of origination scheme represented",
                                 "enum": [
-                                    "lixi2",
+                                    "lixi",
                                     "cdrApplyForBankAccountV1"
                                 ]
                             },
-                            "lixi2": {
-                                "$ref": "#/components/schemas/Lixi2OriginationSchemeModelV1"
+                            "lixi": {
+                                "$ref": "#/components/schemas/LixiOriginationSchemeModelV1"
                             },
                             "cdrApplyForBankAccountV1": {
                                 "$ref": "#/components/schemas/CdrOriginationSchemeModelV1"
@@ -429,9 +429,9 @@
                     "meta"
                 ]
             },
-            "Lixi2OriginationSchemeModelV1": {
+            "LixiOriginationSchemeModelV1": {
                 "type": "object",
-                "description": "Provides the metadata for making an application using a LIXI2 gateway. Mandatory if schemeUType is set to 'lixi2'",
+                "description": "Provides the metadata for making an application using a LIXI gateway. Mandatory if schemeUType is set to 'lixi'",
                 "required": [
                     "submissionUri",
                     "lixiCode",
@@ -440,7 +440,7 @@
                 "properties": {
                     "submissionUri": {
                         "type": "string",
-                        "description": "Base path used to access the LIXI2 gateway",
+                        "description": "Base path used to access the LIXI gateway",
                         "x-cds-type": "URIString"
                     },
                     "schemaUri": {
@@ -454,7 +454,7 @@
                     },
                     "lixiVersion": {
                         "type": "string",
-                        "description": "The supported version of the LIXI2 schema"
+                        "description": "The supported version of the LIXI schema"
                     },
                     "lixiCustomVersion": {
                         "type": "string",
