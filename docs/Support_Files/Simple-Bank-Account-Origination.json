@@ -12,7 +12,7 @@
             "url": "https://opensource.org/licenses/MIT"
         },
         "title": "CDR Experimantal Simple Bank Account Origination API",
-        "version": "0.0.6"
+        "version": "1.0.0"
     },
     "servers": [
         {
@@ -217,6 +217,9 @@
                         "x-conditional": [],
                         "type": "object",
                         "properties": {
+                            "referrer": {
+                                "$ref": "#/components/schemas/ReferrerModelV1"
+                            },
                             "applicants": {
                                 "$ref": "#/components/schemas/ApplicantsModelV1"
                             },
@@ -691,12 +694,839 @@
                     }
                 }
             },
-            "ApplicantsModelV1": {},
-            "ProductsModelV1": {},
-            "IncomeModelV1": {},
-            "ExpensesModelV1": {},
-            "AssetsModelV1": {},
-            "LiabilitiesModelV1": {},
+            "ReferrerModelV1": {
+                "type": "object",
+                "description": "Details of the application referrer",
+                "properties": {
+                    "agent": {
+                        "type": "object",
+                        "description": "Details of the specific agent providing the application",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the referring agent"
+                            },
+                            "phoneNumber": {
+                                "type": "string",
+                                "description": "Contact phone number for the referring agent"
+                            },
+                            "email": {
+                                "type": "string",
+                                "description": "Contact email address of the referring agent"
+                            }
+                        }
+                    },
+                    "accreditation": {
+                        "acl": {
+                            "type": "string",
+                            "description": "The Australian Credit License number of the referrer"
+                        },
+                        "afsl": {
+                            "type": "string",
+                            "description": "The Australian Financial Services License number of the referrer"
+                        }
+                    },
+                    "holderSpecificDetails": {
+                        "type": "object",
+                        "description": "Identifying details specific to, and known by, the data holder receiving the application",
+                        "additionalProperties": true
+                    },
+                    "assertions": {
+                        "type": "object",
+                        "description": "Assertions of compliance steps already undertaken",
+                        "properties": {
+                            "confirmNeedsAnalysisConducted": {
+                                "type": "boolean",
+                                "description": "Assertion that the referrer has, or has not, conducted appropriate nedds analysis"
+                            },
+                            "confirmTargetMarketAssessed": {
+                                "type": "boolean",
+                                "description": "Assertion that the referrer has, or has not, determined that the applicants are included in the target market determinations for the products being applied for"
+                            },
+                            "confirmTerms": {
+                                "type": "object",
+                                "description": "Confirm that terms and conditions have been shown to, and have been approved by, the primary applicant",
+                                "required": [
+                                    "confirmed",
+                                    "termId"
+                                ],
+                                "properties": {
+                                    "confirmed": {
+                                        "type": "boolean",
+                                        "description": "Assertion that the terms and conditions have been shown to, and have been approved by, the primary applicant"
+                                    },
+                                    "termId": {
+                                        "type": "string",
+                                        "description": "The specific ID of the terms that have been approved by the applicant (obtained from the origination scheme)"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ApplicantsModelV1": {
+                "type": "object",
+                "description": "The primary applicant for this application",
+                "required": [
+                    "primary"
+                ],
+                "properties": {
+                    "primary": {
+                        "$ref": "#/components/schemas/ApplicantModelV1"
+                    },
+                    "secondary": {
+                        "type": "array",
+                        "description": "Array of one or more secondary applicants",
+                        "items": {
+                            "$ref": "#/components/schemas/ApplicantModelV1"
+                        }
+                    }
+                }
+            },
+            "ApplicantModelV1": {
+                "allOf": [
+                    {
+                        "type": "object",
+                        "description": "A single applicant",
+                        "required": [
+                            "applicantId"
+                        ],
+                        "properties": {
+                            "applicantId": {
+                                "type": "string",
+                                "description": "The ID of this applicant.  This ID must be uniuqe in the context of this application but does not need to be globally unique"
+                            }
+                        }
+                    },
+                    {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/IndividualApplicantModelV1"
+                            },
+                            {
+                                "$ref": "#/components/schemas/OrganisationApplicantModelV1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "IndividualApplicantModelV1": {
+                "type": "object",
+                "description": "A single applicant who is an individual",
+                "required": [
+                    "name",
+                    "address",
+                    "employment",
+                    "taxRegistration"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the applicant"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Email address of the applicant"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "Contact phone number of the applicant"
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "Address of the applicant"
+                    },
+                    "livingArrangements": {
+                        "type": "string",
+                        "description": "Living arrangements of the applicant",
+                        "enum": [
+                            "OWNER",
+                            "OWNER_WITH_MORTGAGE",
+                            "RENTING",
+                            "OTHER"
+                        ]
+                    },
+                    "employment": {
+                        "type": "string",
+                        "description": "Employment status of the applicant",
+                        "enum": [
+                            "FULL_TIME",
+                            "PART_TIME",
+                            "CONTRACT",
+                            "CASUAL",
+                            "TEMP",
+                            "SELF_EMPLOYED",
+                            "NOT_EMPLOYED"
+                        ]
+                    },
+                    "taxRegistration": {
+                        "type": "object",
+                        "description": "Tax registration of the applicant",
+                        "properties": {
+                            "australia": {
+                                "tfn": {
+                                    "type": "string",
+                                    "description": "Tax file number of the applicant"
+                                }
+                            },
+                            "otherCountries": {
+                                "type": "array",
+                                "description": "Array of other countries where the applicant is registered for tax",
+                                "items": {
+                                    "type": "object",
+                                    "description": "The tax registration in a country other than Australia",
+                                    "required": [
+                                        "country"
+                                    ],
+                                    "properties": {
+                                        "country": {
+                                            "type": "string",
+                                            "description": "Country of tax regisration defined using three character ISO country code"
+                                        },
+                                        "tin": {
+                                            "type": "string",
+                                            "description": "Tax identification number for the registration"
+                                        },
+                                        "reasonForNoTin": {
+                                            "type": "string",
+                                            "description": "Reason for no TIN, if none is provided",
+                                            "enum": [
+                                                "UNABLE_TO_OBTAIN",
+                                                "APPLICATION_IN_PROGRESS",
+                                                "NOT_AVAILABLE"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "proof": {
+                        "type": "object",
+                        "description": "Forms of identity proofs provided by the applicant",
+                        "properties": {
+                            "auDriversLicense": {
+                                "type": "object",
+                                "description": "Details of an Australian drivers license",
+                                "required": [
+                                    "licenseNumber",
+                                    "stateOfIssue"
+                                ],
+                                "properties": {
+                                    "licenseNumber": {
+                                        "type": "string",
+                                        "description": "License number"
+                                    },
+                                    "stateOfIssue": {
+                                        "type": "string",
+                                        "description": "Australian state that the license was issued by",
+                                        "enum": [
+                                            "ACT",
+                                            "NSW",
+                                            "NT",
+                                            "QLD",
+                                            "SA",
+                                            "TAS",
+                                            "VIC",
+                                            "WA"
+                                        ]
+                                    },
+                                    "cardNumber": {
+                                        "type": "string",
+                                        "description": "Additional card number, if available"
+                                    }
+                                }
+                            },
+                            "medicareCard": {
+                                "type": "object",
+                                "description": "Details of a Medicare card",
+                                "required": [
+                                    "colour",
+                                    "cardNumber",
+                                    "referenceNumber"
+                                ],
+                                "properties": {
+                                    "colour": {
+                                        "type": "string",
+                                        "description": "Colour of the Medicare card",
+                                        "enum": [
+                                            "GREEN",
+                                            "BLUE",
+                                            "YELLOW"
+                                        ]
+                                    },
+                                    "cardNumber": {
+                                        "type": "string",
+                                        "description": "Medicare card number"
+                                    },
+                                    "referenceNumber": {
+                                        "type": "string",
+                                        "description": "Reference number next to the name of the applicant"
+                                    }
+                                }
+                            },
+                            "auPassport": {
+                                "type": "object",
+                                "description": "Details of an Australian passport",
+                                "required": [
+                                    "documentNumber",
+                                    "expiryDate"
+                                ],
+                                "properties": {
+                                    "documentNumber": {
+                                        "type": "string",
+                                        "description": "The identifying number of the passport"
+                                    },
+                                    "expiryDate": {
+                                        "type": "string",
+                                        "description": "Date of expiry in RFC3339 full-date format"
+                                    }
+                                }
+                            },
+                            "internationalPassport": {
+                                "type": "object",
+                                "description": "Details of an international (non-Australian) passport",
+                                "required": [
+                                    "documentNumber",
+                                    "country"
+                                ],
+                                "properties": {
+                                    "documentNumber": {
+                                        "type": "string",
+                                        "description": "The identifying number of the passport"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "description": "Country of issue in 3 character ISO format"
+                                    }
+                                }
+                            },
+                            "visa": {
+                                "type": "object",
+                                "description": "Details of a visa for entering Australia",
+                                "properties": {
+                                    "trn": {
+                                        "type": "string",
+                                        "description": "The transaction reference number for the Visa"
+                                    },
+                                    "evidenceNumber": {
+                                        "type": "string",
+                                        "description": "The evidence number for the Visa"
+                                    },
+                                    "grantNumber": {
+                                        "type": "string",
+                                        "description": "The grant number for the Visa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "OrganisationApplicantModelV1": {
+                "type": "object",
+                "description": "Applicant details for an organisation",
+                "additionalProperties": true
+            },
+            "ProductsModelV1": {
+                "type": "array",
+                "description": "The details of the products being applied for",
+                "items": {
+                    "type": "object",
+                    "description": "The details of a single product being applied for",
+                    "required": [
+                        "productId"
+                    ],
+                    "properties": {
+                        "productId": {
+                            "type": "string",
+                            "description": "The ID of the product being applied for as defined in the bank PRD endpoints"
+                        },
+                        "homeLoan": {
+                            "type": "object",
+                            "description": "Additional details if the product is a home loan",
+                            "required": [
+                                "loanPurpose",
+                                "repaymentType",
+                                "term",
+                                "amount",
+                                "propertyValue"
+                            ],
+                            "properties": {
+                                "repaymentType": {
+                                    "type": "string",
+                                    "description": "Option requested for repayments",
+                                    "enum": [
+                                        "INTEREST_ONLY",
+                                        "PRINCIPAL_AND_INTEREST"
+                                    ]
+                                },
+                                "loanPurpose": {
+                                    "type": "string",
+                                    "description": "The reason for taking out the loan",
+                                    "enum": [
+                                        "INVESTMENT",
+                                        "OWNER_OCCUPIED"
+                                    ]
+                                },
+                                "term": {
+                                    "type": "number",
+                                    "description": "The length of the loan in months"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "description": "The amount requested for the loan in AUD"
+                                },
+                                "propertyValue": {
+                                    "type": "number",
+                                    "description": "The estimated value of the property to be purchased in AUD"
+                                },
+                                "propertyAddress": {
+                                    "type": "string",
+                                    "description": "The address of the property to be purchased, if known"
+                                }
+                            }
+                        },
+                        "termDeposit": {
+                            "type": "object",
+                            "description": "Additional details if the product is a term deposit",
+                            "required": [
+                                "term",
+                                "amount"
+                            ],
+                            "properties": {
+                                "term": {
+                                    "type": "number",
+                                    "description": "The length of time for the term deposit to be established in months"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "description": "The amount of savings in AUD"
+                                }
+                            }
+                        },
+                        "personalLoan": {
+                            "type": "object",
+                            "description": "Additional details if the product is a personal loan",
+                            "required": [
+                                "loanPurpose",
+                                "repaymentType",
+                                "term",
+                                "amount"
+                            ],
+                            "properties": {
+                                "repaymentType": {
+                                    "type": "string",
+                                    "description": "Option requested for repayments",
+                                    "enum": [
+                                        "INTEREST_ONLY",
+                                        "PRINCIPAL_AND_INTEREST"
+                                    ]
+                                },
+                                "loanPurpose": {
+                                    "type": "string",
+                                    "description": "The reason for taking out the loan"
+                                },
+                                "term": {
+                                    "type": "number",
+                                    "description": "The length of the loan in months"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "description": "The amount requested for the loan in AUD"
+                                }
+                            }
+                        },
+                        "creditCard": {
+                            "type": "object",
+                            "description": "Additional details if the product is a credit card",
+                            "required": [
+                                "limit"
+                            ],
+                            "properties": {
+                                "limit": {
+                                    "type": "string",
+                                    "description": "The limit requested for card"
+                                },
+                                "balanceTransfer": {
+                                    "type": "number",
+                                    "description": "The estimated balance, in AUD, to be transferred to the new card once established"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "IncomeModelV1": {
+                "type": "array",
+                "description": "Array of income for one or more applicants",
+                "items": {
+                    "type": "object",
+                    "description": "Income for specific applicants",
+                    "required": [
+                        "applicantIds",
+                        "income"
+                    ],
+                    "properties": {
+                        "properties": {
+                            "applicantIds": {
+                                "type": "array",
+                                "description": "The IDs of the applicants that these income items are associated with",
+                                "items": {
+                                    "type": "string",
+                                    "description": "A single applicant ID"
+                                }
+                            },
+                            "income": {
+                                "type": "objects",
+                                "description": "The income associated with the specified applicants",
+                                "properties": {
+                                    "properties": {
+                                        "type": "array",
+                                        "description": "Array of income items",
+                                        "items": {
+                                            "type": "object",
+                                            "description": "A single income item",
+                                            "required": [
+                                                "type",
+                                                "estimatedValue",
+                                                "period"
+                                            ],
+                                            "properties": {
+                                                "type": {
+                                                    "type": "string",
+                                                    "description": "The type of income",
+                                                    "enum": [
+                                                        "SALARY",
+                                                        "OVERTIME",
+                                                        "COMMISSION_INCOME",
+                                                        "BONUS_INCOME",
+                                                        "CASUAL_INCOME",
+                                                        "SELF_EMPLOYMENT",
+                                                        "GOV_ALLOWANCE",
+                                                        "CHILD_SUPPORT",
+                                                        "RENTAL_INCOME",
+                                                        "SUPERANNUATION",
+                                                        "ASSET_INCOME",
+                                                        "FOREIGN_INCOME",
+                                                        "DEFENCE_FORCE_INCOME",
+                                                        "OTHER"
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "estimatedValue": {
+                                                        "type": "number",
+                                                        "description": "Estimated value of the income in AUD"
+                                                    }
+                                                },
+                                                "period": {
+                                                    "$ref": "#/components/schemas/PeriodModelV1"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ExpensesModelV1": {
+                "type": "array",
+                "description": "Array of expenses for one or more applicants",
+                "items": {
+                    "type": "object",
+                    "description": "Expenses for specific applicants",
+                    "required": [
+                        "applicantIds",
+                        "expenses"
+                    ],
+                    "properties": {
+                        "properties": {
+                            "applicantIds": {
+                                "type": "array",
+                                "description": "The IDs of the applicants that these expenses are associated with",
+                                "items": {
+                                    "type": "string",
+                                    "description": "A single applicant ID"
+                                }
+                            },
+                            "expenses": {
+                                "type": "objects",
+                                "description": "The expenses associated with the specified applicants",
+                                "properties": {
+                                    "properties": {
+                                        "type": "array",
+                                        "description": "Array of expenses",
+                                        "items": {
+                                            "type": "object",
+                                            "description": "A single expense",
+                                            "required": [
+                                                "type",
+                                                "estimatedValue",
+                                                "period"
+                                            ],
+                                            "properties": {
+                                                "type": {
+                                                    "type": "string",
+                                                    "description": "The type of expense",
+                                                    "enum": [
+                                                        "OTHER_ACCOMMODATION",
+                                                        "HOUSEHOLD",
+                                                        "UTILITIES",
+                                                        "GROCERIES",
+                                                        "HEALTH",
+                                                        "PERSONAL_INSURANCE",
+                                                        "TRANSPOT_AND_VEHICLES",
+                                                        "TV_AND_COMMS",
+                                                        "PERSONAL",
+                                                        "LIFESTYLE",
+                                                        "CHILDCARE",
+                                                        "PUBLIC_EDUCATION",
+                                                        "PRIVATE_EDUCATION",
+                                                        "FAMILY_MAINTENANCE",
+                                                        "PROFESSIONAL_SERVICES",
+                                                        "OTHER"
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "estimatedValue": {
+                                                        "type": "number",
+                                                        "description": "Estimated value of the expense in AUD"
+                                                    }
+                                                },
+                                                "period": {
+                                                    "$ref": "#/components/schemas/PeriodModelV1"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AssetsModelV1": {
+                "type": "array",
+                "description": "Array of assets for one or more applicants",
+                "items": {
+                    "type": "object",
+                    "description": "Assets for specific applicants",
+                    "required": [
+                        "applicantIds",
+                        "assets"
+                    ],
+                    "properties": {
+                        "applicantIds": {
+                            "type": "array",
+                            "description": "The IDs of the applicants that these assets are associated with",
+                            "items": {
+                                "type": "string",
+                                "description": "A single applicant ID"
+                            }
+                        },
+                        "assets": {
+                            "type": "object",
+                            "description": "The assets associated with the specified applicants",
+                            "properties": {
+                                "properties": {
+                                    "type": "array",
+                                    "description": "Array of properties in this asset set",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "A single property asset",
+                                        "required": [
+                                            "address",
+                                            "estimatedValue"
+                                        ],
+                                        "properties": {
+                                            "address": {
+                                                "type": "string",
+                                                "description": "Address of the property"
+                                            },
+                                            "estimatedValue": {
+                                                "type": "number",
+                                                "description": "Estimated value of the property in AUD"
+                                            }
+                                        }
+                                    }
+                                },
+                                "savings": {
+                                    "type": "object",
+                                    "description": "Cash savings held with bank",
+                                    "required": [
+                                        "valueHeldHere",
+                                        "valueHeldElsewhere"
+                                    ],
+                                    "properties": {
+                                        "valueHeldHere": {
+                                            "type": "number",
+                                            "description": "Cash savings held with the bank the application is being submitted to"
+                                        },
+                                        "estimatedValue": {
+                                            "type": "number",
+                                            "description": "Cash savings held with other banks"
+                                        }
+                                    }
+                                },
+                                "other": {
+                                    "type": "array",
+                                    "description": "Array of other assets",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "A single generic asset",
+                                        "required": [
+                                            "description",
+                                            "estimatedValue"
+                                        ],
+                                        "properties": {
+                                            "description": {
+                                                "type": "string",
+                                                "description": "Description of the asset"
+                                            },
+                                            "estimatedValue": {
+                                                "type": "number",
+                                                "description": "Estimated value of the asset in AUD"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "LiabilitiesModelV1": {
+                "type": "array",
+                "description": "Array of liabilities for one or more applicants",
+                "items": {
+                    "type": "object",
+                    "description": "Liabilities for specific applicants",
+                    "required": [
+                        "applicantIds",
+                        "liabilities"
+                    ],
+                    "properties": {
+                        "applicantIds": {
+                            "type": "array",
+                            "description": "The IDs of the applicants that these liabilities are associated with",
+                            "items": {
+                                "type": "string",
+                                "description": "A single applicant ID"
+                            }
+                        },
+                        "liabilities": {
+                            "type": "object",
+                            "description": "The liabilities associated with the specified applicants",
+                            "properties": {
+                                "mortgages": {
+                                    "type": "object",
+                                    "description": "Mortgage balances",
+                                    "required": [
+                                        "balanceHere",
+                                        "balanceElsewhere"
+                                    ],
+                                    "properties": {
+                                        "balanceHere": {
+                                            "type": "number",
+                                            "description": "Liability balance with the bank the application is being submitted to"
+                                        },
+                                        "balanceElsewhere": {
+                                            "type": "number",
+                                            "description": "Liability balance held with other banks"
+                                        }
+                                    }
+                                },
+                                "creditCards": {
+                                    "type": "object",
+                                    "description": "Credit card balances",
+                                    "required": [
+                                        "balanceHere",
+                                        "balanceElsewhere"
+                                    ],
+                                    "properties": {
+                                        "balanceHere": {
+                                            "type": "number",
+                                            "description": "Liability balance with the bank the application is being submitted to"
+                                        },
+                                        "balanceElsewhere": {
+                                            "type": "number",
+                                            "description": "Liability balance held with other banks"
+                                        }
+                                    }
+                                },
+                                "personalLoans": {
+                                    "type": "object",
+                                    "description": "Personal loan balances",
+                                    "required": [
+                                        "balanceHere",
+                                        "balanceElsewhere"
+                                    ],
+                                    "properties": {
+                                        "balanceHere": {
+                                            "type": "number",
+                                            "description": "Liability balance with the bank the application is being submitted to"
+                                        },
+                                        "balanceElsewhere": {
+                                            "type": "number",
+                                            "description": "Liability balance held with other banks"
+                                        }
+                                    }
+                                },
+                                "linesOfCredit": {
+                                    "type": "object",
+                                    "description": "Overdraft or lines of credit balances",
+                                    "required": [
+                                        "balanceHere",
+                                        "balanceElsewhere"
+                                    ],
+                                    "properties": {
+                                        "balanceHere": {
+                                            "type": "number",
+                                            "description": "Liability balance with the bank the application is being submitted to"
+                                        },
+                                        "balanceElsewhere": {
+                                            "type": "number",
+                                            "description": "Liability balance held with other banks"
+                                        }
+                                    }
+                                },
+                                "other": {
+                                    "type": "object",
+                                    "description": "Balance of other liabilities",
+                                    "required": [
+                                        "balanceHere",
+                                        "balanceElsewhere"
+                                    ],
+                                    "properties": {
+                                        "balanceHere": {
+                                            "type": "number",
+                                            "description": "Liability balance with the bank the application is being submitted to"
+                                        },
+                                        "balanceElsewhere": {
+                                            "type": "number",
+                                            "description": "Liability balance held with other banks"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "PeriodModelV1": {
+                "type": "string",
+                "description": "The period for income or expense",
+                "enum": [
+                    "WEEKLY",
+                    "FORTIGHTLY",
+                    "MONTHLY",
+                    "QUARTERLY",
+                    "ANNUALLY"
+                ]
+            },
             "CdrPayloadModelV1": {
                 "type": "object",
                 "required": [

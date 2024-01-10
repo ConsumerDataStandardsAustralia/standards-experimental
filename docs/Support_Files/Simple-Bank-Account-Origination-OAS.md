@@ -1,6 +1,6 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v0.0.6</h1>
+<h1 id="cdr-experimantal-simple-bank-account-origination-api">CDR Experimantal Simple Bank Account Origination API v1.0.0</h1>
 
 > Scroll down for example requests and responses.
 
@@ -163,12 +163,206 @@ Submit an application, on behalf of a consumer, to apply for an account to be or
 ```json
 {
   "data": {
-    "applicants": null,
-    "products": null,
-    "income": null,
-    "expenses": null,
-    "assets": null,
-    "liabilities": null,
+    "referrer": {
+      "agent": {
+        "name": "string",
+        "phoneNumber": "string",
+        "email": "string"
+      },
+      "accreditation": null,
+      "holderSpecificDetails": {},
+      "assertions": {
+        "confirmNeedsAnalysisConducted": true,
+        "confirmTargetMarketAssessed": true,
+        "confirmTerms": {
+          "confirmed": true,
+          "termId": "string"
+        }
+      }
+    },
+    "applicants": {
+      "primary": {
+        "applicantId": "string",
+        "name": "string",
+        "email": "string",
+        "phone": "string",
+        "address": "string",
+        "livingArrangements": "OWNER",
+        "employment": "FULL_TIME",
+        "taxRegistration": {
+          "australia": null,
+          "otherCountries": [
+            {
+              "country": "string",
+              "tin": "string",
+              "reasonForNoTin": "UNABLE_TO_OBTAIN"
+            }
+          ]
+        },
+        "proof": {
+          "auDriversLicense": {
+            "licenseNumber": "string",
+            "stateOfIssue": "ACT",
+            "cardNumber": "string"
+          },
+          "medicareCard": {
+            "colour": "GREEN",
+            "cardNumber": "string",
+            "referenceNumber": "string"
+          },
+          "auPassport": {
+            "documentNumber": "string",
+            "expiryDate": "string"
+          },
+          "internationalPassport": {
+            "documentNumber": "string",
+            "country": "string"
+          },
+          "visa": {
+            "trn": "string",
+            "evidenceNumber": "string",
+            "grantNumber": "string"
+          }
+        }
+      },
+      "secondary": [
+        {
+          "applicantId": "string",
+          "name": "string",
+          "email": "string",
+          "phone": "string",
+          "address": "string",
+          "livingArrangements": "OWNER",
+          "employment": "FULL_TIME",
+          "taxRegistration": {
+            "australia": null,
+            "otherCountries": [
+              {
+                "country": "string",
+                "tin": "string",
+                "reasonForNoTin": "UNABLE_TO_OBTAIN"
+              }
+            ]
+          },
+          "proof": {
+            "auDriversLicense": {
+              "licenseNumber": "string",
+              "stateOfIssue": "ACT",
+              "cardNumber": "string"
+            },
+            "medicareCard": {
+              "colour": "GREEN",
+              "cardNumber": "string",
+              "referenceNumber": "string"
+            },
+            "auPassport": {
+              "documentNumber": "string",
+              "expiryDate": "string"
+            },
+            "internationalPassport": {
+              "documentNumber": "string",
+              "country": "string"
+            },
+            "visa": {
+              "trn": "string",
+              "evidenceNumber": "string",
+              "grantNumber": "string"
+            }
+          }
+        }
+      ]
+    },
+    "products": [
+      {
+        "productId": "string",
+        "homeLoan": {
+          "repaymentType": "INTEREST_ONLY",
+          "loanPurpose": "INVESTMENT",
+          "term": 0,
+          "amount": 0,
+          "propertyValue": 0,
+          "propertyAddress": "string"
+        },
+        "termDeposit": {
+          "term": 0,
+          "amount": 0
+        },
+        "personalLoan": {
+          "repaymentType": "INTEREST_ONLY",
+          "loanPurpose": "string",
+          "term": 0,
+          "amount": 0
+        },
+        "creditCard": {
+          "limit": "string",
+          "balanceTransfer": 0
+        }
+      }
+    ],
+    "income": [
+      {
+        "properties": null
+      }
+    ],
+    "expenses": [
+      {
+        "properties": null
+      }
+    ],
+    "assets": [
+      {
+        "applicantIds": [
+          "string"
+        ],
+        "assets": {
+          "properties": [
+            {
+              "address": "string",
+              "estimatedValue": 0
+            }
+          ],
+          "savings": {
+            "valueHeldHere": 0,
+            "estimatedValue": 0
+          },
+          "other": [
+            {
+              "description": "string",
+              "estimatedValue": 0
+            }
+          ]
+        }
+      }
+    ],
+    "liabilities": [
+      {
+        "applicantIds": [
+          "string"
+        ],
+        "liabilities": {
+          "mortgages": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "creditCards": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "personalLoans": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "linesOfCredit": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "other": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          }
+        }
+      }
+    ],
     "cdrData": {
       "cdrAccounts": [
         {
@@ -286,12 +480,206 @@ This operation does not require authentication
 ```json
 {
   "data": {
-    "applicants": null,
-    "products": null,
-    "income": null,
-    "expenses": null,
-    "assets": null,
-    "liabilities": null,
+    "referrer": {
+      "agent": {
+        "name": "string",
+        "phoneNumber": "string",
+        "email": "string"
+      },
+      "accreditation": null,
+      "holderSpecificDetails": {},
+      "assertions": {
+        "confirmNeedsAnalysisConducted": true,
+        "confirmTargetMarketAssessed": true,
+        "confirmTerms": {
+          "confirmed": true,
+          "termId": "string"
+        }
+      }
+    },
+    "applicants": {
+      "primary": {
+        "applicantId": "string",
+        "name": "string",
+        "email": "string",
+        "phone": "string",
+        "address": "string",
+        "livingArrangements": "OWNER",
+        "employment": "FULL_TIME",
+        "taxRegistration": {
+          "australia": null,
+          "otherCountries": [
+            {
+              "country": "string",
+              "tin": "string",
+              "reasonForNoTin": "UNABLE_TO_OBTAIN"
+            }
+          ]
+        },
+        "proof": {
+          "auDriversLicense": {
+            "licenseNumber": "string",
+            "stateOfIssue": "ACT",
+            "cardNumber": "string"
+          },
+          "medicareCard": {
+            "colour": "GREEN",
+            "cardNumber": "string",
+            "referenceNumber": "string"
+          },
+          "auPassport": {
+            "documentNumber": "string",
+            "expiryDate": "string"
+          },
+          "internationalPassport": {
+            "documentNumber": "string",
+            "country": "string"
+          },
+          "visa": {
+            "trn": "string",
+            "evidenceNumber": "string",
+            "grantNumber": "string"
+          }
+        }
+      },
+      "secondary": [
+        {
+          "applicantId": "string",
+          "name": "string",
+          "email": "string",
+          "phone": "string",
+          "address": "string",
+          "livingArrangements": "OWNER",
+          "employment": "FULL_TIME",
+          "taxRegistration": {
+            "australia": null,
+            "otherCountries": [
+              {
+                "country": "string",
+                "tin": "string",
+                "reasonForNoTin": "UNABLE_TO_OBTAIN"
+              }
+            ]
+          },
+          "proof": {
+            "auDriversLicense": {
+              "licenseNumber": "string",
+              "stateOfIssue": "ACT",
+              "cardNumber": "string"
+            },
+            "medicareCard": {
+              "colour": "GREEN",
+              "cardNumber": "string",
+              "referenceNumber": "string"
+            },
+            "auPassport": {
+              "documentNumber": "string",
+              "expiryDate": "string"
+            },
+            "internationalPassport": {
+              "documentNumber": "string",
+              "country": "string"
+            },
+            "visa": {
+              "trn": "string",
+              "evidenceNumber": "string",
+              "grantNumber": "string"
+            }
+          }
+        }
+      ]
+    },
+    "products": [
+      {
+        "productId": "string",
+        "homeLoan": {
+          "repaymentType": "INTEREST_ONLY",
+          "loanPurpose": "INVESTMENT",
+          "term": 0,
+          "amount": 0,
+          "propertyValue": 0,
+          "propertyAddress": "string"
+        },
+        "termDeposit": {
+          "term": 0,
+          "amount": 0
+        },
+        "personalLoan": {
+          "repaymentType": "INTEREST_ONLY",
+          "loanPurpose": "string",
+          "term": 0,
+          "amount": 0
+        },
+        "creditCard": {
+          "limit": "string",
+          "balanceTransfer": 0
+        }
+      }
+    ],
+    "income": [
+      {
+        "properties": null
+      }
+    ],
+    "expenses": [
+      {
+        "properties": null
+      }
+    ],
+    "assets": [
+      {
+        "applicantIds": [
+          "string"
+        ],
+        "assets": {
+          "properties": [
+            {
+              "address": "string",
+              "estimatedValue": 0
+            }
+          ],
+          "savings": {
+            "valueHeldHere": 0,
+            "estimatedValue": 0
+          },
+          "other": [
+            {
+              "description": "string",
+              "estimatedValue": 0
+            }
+          ]
+        }
+      }
+    ],
+    "liabilities": [
+      {
+        "applicantIds": [
+          "string"
+        ],
+        "liabilities": {
+          "mortgages": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "creditCards": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "personalLoans": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "linesOfCredit": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          },
+          "other": {
+            "balanceHere": 0,
+            "balanceElsewhere": 0
+          }
+        }
+      }
+    ],
     "cdrData": {
       "cdrAccounts": [
         {
@@ -345,12 +733,13 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |data|object|true|none|none|
-|» applicants|[ApplicantsModelV1](#schemaapplicantsmodelv1)|false|none|none|
-|» products|[ProductsModelV1](#schemaproductsmodelv1)|false|none|none|
-|» income|[IncomeModelV1](#schemaincomemodelv1)|false|none|none|
-|» expenses|[ExpensesModelV1](#schemaexpensesmodelv1)|false|none|none|
-|» assets|[AssetsModelV1](#schemaassetsmodelv1)|false|none|none|
-|» liabilities|[LiabilitiesModelV1](#schemaliabilitiesmodelv1)|false|none|none|
+|» referrer|[ReferrerModelV1](#schemareferrermodelv1)|false|none|Details of the application referrer|
+|» applicants|[ApplicantsModelV1](#schemaapplicantsmodelv1)|false|none|The primary applicant for this application|
+|» products|[ProductsModelV1](#schemaproductsmodelv1)|false|none|The details of the products being applied for|
+|» income|[IncomeModelV1](#schemaincomemodelv1)|false|none|Array of income for one or more applicants|
+|» expenses|[ExpensesModelV1](#schemaexpensesmodelv1)|false|none|Array of expenses for one or more applicants|
+|» assets|[AssetsModelV1](#schemaassetsmodelv1)|false|none|Array of assets for one or more applicants|
+|» liabilities|[LiabilitiesModelV1](#schemaliabilitiesmodelv1)|false|none|Array of liabilities for one or more applicants|
 |» cdrData|object|false|none|none|
 |»» cdrAccounts|[[CdrPayloadModelV1](#schemacdrpayloadmodelv1)]|false|none|Array of summary account data for an applicant obtained from the CDR|
 |»» cdrAccountDetails|[[CdrPayloadModelV1](#schemacdrpayloadmodelv1)]|false|none|Array of detailed account data for an applicant obtained from the CDR|
@@ -860,6 +1249,53 @@ A single reason given to explain the rejection of an application
 |code|MISSING_DATA|
 |code|NOT_ELIGIBLE|
 
+<h2 id="tocS_ReferrerModelV1">ReferrerModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemareferrermodelv1"></a>
+<a id="schema_ReferrerModelV1"></a>
+<a id="tocSreferrermodelv1"></a>
+<a id="tocsreferrermodelv1"></a>
+
+```json
+{
+  "agent": {
+    "name": "string",
+    "phoneNumber": "string",
+    "email": "string"
+  },
+  "accreditation": null,
+  "holderSpecificDetails": {},
+  "assertions": {
+    "confirmNeedsAnalysisConducted": true,
+    "confirmTargetMarketAssessed": true,
+    "confirmTerms": {
+      "confirmed": true,
+      "termId": "string"
+    }
+  }
+}
+
+```
+
+Details of the application referrer
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|agent|object|false|none|Details of the specific agent providing the application|
+|» name|string|false|none|Name of the referring agent|
+|» phoneNumber|string|false|none|Contact phone number for the referring agent|
+|» email|string|false|none|Contact email address of the referring agent|
+|accreditation|any|false|none|none|
+|holderSpecificDetails|object|false|none|Identifying details specific to, and known by, the data holder receiving the application|
+|assertions|object|false|none|Assertions of compliance steps already undertaken|
+|» confirmNeedsAnalysisConducted|boolean|false|none|Assertion that the referrer has, or has not, conducted appropriate nedds analysis|
+|» confirmTargetMarketAssessed|boolean|false|none|Assertion that the referrer has, or has not, determined that the applicants are included in the target market determinations for the products being applied for|
+|» confirmTerms|object|false|none|Confirm that terms and conditions have been shown to, and have been approved by, the primary applicant|
+|»» confirmed|boolean|true|none|Assertion that the terms and conditions have been shown to, and have been approved by, the primary applicant|
+|»» termId|string|true|none|The specific ID of the terms that have been approved by the applicant (obtained from the origination scheme)|
+
 <h2 id="tocS_ApplicantsModelV1">ApplicantsModelV1</h2>
 <!-- backwards compatibility -->
 <a id="schemaapplicantsmodelv1"></a>
@@ -868,9 +1304,327 @@ A single reason given to explain the rejection of an application
 <a id="tocsapplicantsmodelv1"></a>
 
 ```json
-null
+{
+  "primary": {
+    "applicantId": "string",
+    "name": "string",
+    "email": "string",
+    "phone": "string",
+    "address": "string",
+    "livingArrangements": "OWNER",
+    "employment": "FULL_TIME",
+    "taxRegistration": {
+      "australia": null,
+      "otherCountries": [
+        {
+          "country": "string",
+          "tin": "string",
+          "reasonForNoTin": "UNABLE_TO_OBTAIN"
+        }
+      ]
+    },
+    "proof": {
+      "auDriversLicense": {
+        "licenseNumber": "string",
+        "stateOfIssue": "ACT",
+        "cardNumber": "string"
+      },
+      "medicareCard": {
+        "colour": "GREEN",
+        "cardNumber": "string",
+        "referenceNumber": "string"
+      },
+      "auPassport": {
+        "documentNumber": "string",
+        "expiryDate": "string"
+      },
+      "internationalPassport": {
+        "documentNumber": "string",
+        "country": "string"
+      },
+      "visa": {
+        "trn": "string",
+        "evidenceNumber": "string",
+        "grantNumber": "string"
+      }
+    }
+  },
+  "secondary": [
+    {
+      "applicantId": "string",
+      "name": "string",
+      "email": "string",
+      "phone": "string",
+      "address": "string",
+      "livingArrangements": "OWNER",
+      "employment": "FULL_TIME",
+      "taxRegistration": {
+        "australia": null,
+        "otherCountries": [
+          {
+            "country": "string",
+            "tin": "string",
+            "reasonForNoTin": "UNABLE_TO_OBTAIN"
+          }
+        ]
+      },
+      "proof": {
+        "auDriversLicense": {
+          "licenseNumber": "string",
+          "stateOfIssue": "ACT",
+          "cardNumber": "string"
+        },
+        "medicareCard": {
+          "colour": "GREEN",
+          "cardNumber": "string",
+          "referenceNumber": "string"
+        },
+        "auPassport": {
+          "documentNumber": "string",
+          "expiryDate": "string"
+        },
+        "internationalPassport": {
+          "documentNumber": "string",
+          "country": "string"
+        },
+        "visa": {
+          "trn": "string",
+          "evidenceNumber": "string",
+          "grantNumber": "string"
+        }
+      }
+    }
+  ]
+}
 
 ```
+
+The primary applicant for this application
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|primary|[ApplicantModelV1](#schemaapplicantmodelv1)|true|none|none|
+|secondary|[[ApplicantModelV1](#schemaapplicantmodelv1)]|false|none|Array of one or more secondary applicants|
+
+<h2 id="tocS_ApplicantModelV1">ApplicantModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaapplicantmodelv1"></a>
+<a id="schema_ApplicantModelV1"></a>
+<a id="tocSapplicantmodelv1"></a>
+<a id="tocsapplicantmodelv1"></a>
+
+```json
+{
+  "applicantId": "string",
+  "name": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "livingArrangements": "OWNER",
+  "employment": "FULL_TIME",
+  "taxRegistration": {
+    "australia": null,
+    "otherCountries": [
+      {
+        "country": "string",
+        "tin": "string",
+        "reasonForNoTin": "UNABLE_TO_OBTAIN"
+      }
+    ]
+  },
+  "proof": {
+    "auDriversLicense": {
+      "licenseNumber": "string",
+      "stateOfIssue": "ACT",
+      "cardNumber": "string"
+    },
+    "medicareCard": {
+      "colour": "GREEN",
+      "cardNumber": "string",
+      "referenceNumber": "string"
+    },
+    "auPassport": {
+      "documentNumber": "string",
+      "expiryDate": "string"
+    },
+    "internationalPassport": {
+      "documentNumber": "string",
+      "country": "string"
+    },
+    "visa": {
+      "trn": "string",
+      "evidenceNumber": "string",
+      "grantNumber": "string"
+    }
+  }
+}
+
+```
+
+### Properties
+
+allOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|object|false|none|A single applicant|
+|» applicantId|string|true|none|The ID of this applicant.  This ID must be uniuqe in the context of this application but does not need to be globally unique|
+
+and
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|any|false|none|none|
+
+oneOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[IndividualApplicantModelV1](#schemaindividualapplicantmodelv1)|false|none|A single applicant who is an individual|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» *anonymous*|[OrganisationApplicantModelV1](#schemaorganisationapplicantmodelv1)|false|none|Applicant details for an organisation|
+
+<h2 id="tocS_IndividualApplicantModelV1">IndividualApplicantModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaindividualapplicantmodelv1"></a>
+<a id="schema_IndividualApplicantModelV1"></a>
+<a id="tocSindividualapplicantmodelv1"></a>
+<a id="tocsindividualapplicantmodelv1"></a>
+
+```json
+{
+  "name": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "livingArrangements": "OWNER",
+  "employment": "FULL_TIME",
+  "taxRegistration": {
+    "australia": null,
+    "otherCountries": [
+      {
+        "country": "string",
+        "tin": "string",
+        "reasonForNoTin": "UNABLE_TO_OBTAIN"
+      }
+    ]
+  },
+  "proof": {
+    "auDriversLicense": {
+      "licenseNumber": "string",
+      "stateOfIssue": "ACT",
+      "cardNumber": "string"
+    },
+    "medicareCard": {
+      "colour": "GREEN",
+      "cardNumber": "string",
+      "referenceNumber": "string"
+    },
+    "auPassport": {
+      "documentNumber": "string",
+      "expiryDate": "string"
+    },
+    "internationalPassport": {
+      "documentNumber": "string",
+      "country": "string"
+    },
+    "visa": {
+      "trn": "string",
+      "evidenceNumber": "string",
+      "grantNumber": "string"
+    }
+  }
+}
+
+```
+
+A single applicant who is an individual
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|name|string|true|none|The name of the applicant|
+|email|string|false|none|Email address of the applicant|
+|phone|string|false|none|Contact phone number of the applicant|
+|address|string|true|none|Address of the applicant|
+|livingArrangements|string|false|none|Living arrangements of the applicant|
+|employment|string|true|none|Employment status of the applicant|
+|taxRegistration|object|true|none|Tax registration of the applicant|
+|» australia|any|false|none|none|
+|» otherCountries|[object]|false|none|Array of other countries where the applicant is registered for tax|
+|»» country|string|true|none|Country of tax regisration defined using three character ISO country code|
+|»» tin|string|false|none|Tax identification number for the registration|
+|»» reasonForNoTin|string|false|none|Reason for no TIN, if none is provided|
+|proof|object|false|none|Forms of identity proofs provided by the applicant|
+|» auDriversLicense|object|false|none|Details of an Australian drivers license|
+|»» licenseNumber|string|true|none|License number|
+|»» stateOfIssue|string|true|none|Australian state that the license was issued by|
+|»» cardNumber|string|false|none|Additional card number, if available|
+|» medicareCard|object|false|none|Details of a Medicare card|
+|»» colour|string|true|none|Colour of the Medicare card|
+|»» cardNumber|string|true|none|Medicare card number|
+|»» referenceNumber|string|true|none|Reference number next to the name of the applicant|
+|» auPassport|object|false|none|Details of an Australian passport|
+|»» documentNumber|string|true|none|The identifying number of the passport|
+|»» expiryDate|string|true|none|Date of expiry in RFC3339 full-date format|
+|» internationalPassport|object|false|none|Details of an international (non-Australian) passport|
+|»» documentNumber|string|true|none|The identifying number of the passport|
+|»» country|string|true|none|Country of issue in 3 character ISO format|
+|» visa|object|false|none|Details of a visa for entering Australia|
+|»» trn|string|false|none|The transaction reference number for the Visa|
+|»» evidenceNumber|string|false|none|The evidence number for the Visa|
+|»» grantNumber|string|false|none|The grant number for the Visa|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|livingArrangements|OWNER|
+|livingArrangements|OWNER_WITH_MORTGAGE|
+|livingArrangements|RENTING|
+|livingArrangements|OTHER|
+|employment|FULL_TIME|
+|employment|PART_TIME|
+|employment|CONTRACT|
+|employment|CASUAL|
+|employment|TEMP|
+|employment|SELF_EMPLOYED|
+|employment|NOT_EMPLOYED|
+|reasonForNoTin|UNABLE_TO_OBTAIN|
+|reasonForNoTin|APPLICATION_IN_PROGRESS|
+|reasonForNoTin|NOT_AVAILABLE|
+|stateOfIssue|ACT|
+|stateOfIssue|NSW|
+|stateOfIssue|NT|
+|stateOfIssue|QLD|
+|stateOfIssue|SA|
+|stateOfIssue|TAS|
+|stateOfIssue|VIC|
+|stateOfIssue|WA|
+|colour|GREEN|
+|colour|BLUE|
+|colour|YELLOW|
+
+<h2 id="tocS_OrganisationApplicantModelV1">OrganisationApplicantModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaorganisationapplicantmodelv1"></a>
+<a id="schema_OrganisationApplicantModelV1"></a>
+<a id="tocSorganisationapplicantmodelv1"></a>
+<a id="tocsorganisationapplicantmodelv1"></a>
+
+```json
+{}
+
+```
+
+Applicant details for an organisation
 
 ### Properties
 
@@ -884,13 +1638,72 @@ null
 <a id="tocsproductsmodelv1"></a>
 
 ```json
-null
+[
+  {
+    "productId": "string",
+    "homeLoan": {
+      "repaymentType": "INTEREST_ONLY",
+      "loanPurpose": "INVESTMENT",
+      "term": 0,
+      "amount": 0,
+      "propertyValue": 0,
+      "propertyAddress": "string"
+    },
+    "termDeposit": {
+      "term": 0,
+      "amount": 0
+    },
+    "personalLoan": {
+      "repaymentType": "INTEREST_ONLY",
+      "loanPurpose": "string",
+      "term": 0,
+      "amount": 0
+    },
+    "creditCard": {
+      "limit": "string",
+      "balanceTransfer": 0
+    }
+  }
+]
 
 ```
 
+The details of the products being applied for
+
 ### Properties
 
-*None*
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|productId|string|true|none|The ID of the product being applied for as defined in the bank PRD endpoints|
+|homeLoan|object|false|none|Additional details if the product is a home loan|
+|» repaymentType|string|true|none|Option requested for repayments|
+|» loanPurpose|string|true|none|The reason for taking out the loan|
+|» term|number|true|none|The length of the loan in months|
+|» amount|number|true|none|The amount requested for the loan in AUD|
+|» propertyValue|number|true|none|The estimated value of the property to be purchased in AUD|
+|» propertyAddress|string|false|none|The address of the property to be purchased, if known|
+|termDeposit|object|false|none|Additional details if the product is a term deposit|
+|» term|number|true|none|The length of time for the term deposit to be established in months|
+|» amount|number|true|none|The amount of savings in AUD|
+|personalLoan|object|false|none|Additional details if the product is a personal loan|
+|» repaymentType|string|true|none|Option requested for repayments|
+|» loanPurpose|string|true|none|The reason for taking out the loan|
+|» term|number|true|none|The length of the loan in months|
+|» amount|number|true|none|The amount requested for the loan in AUD|
+|creditCard|object|false|none|Additional details if the product is a credit card|
+|» limit|string|true|none|The limit requested for card|
+|» balanceTransfer|number|false|none|The estimated balance, in AUD, to be transferred to the new card once established|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|repaymentType|INTEREST_ONLY|
+|repaymentType|PRINCIPAL_AND_INTEREST|
+|loanPurpose|INVESTMENT|
+|loanPurpose|OWNER_OCCUPIED|
+|repaymentType|INTEREST_ONLY|
+|repaymentType|PRINCIPAL_AND_INTEREST|
 
 <h2 id="tocS_IncomeModelV1">IncomeModelV1</h2>
 <!-- backwards compatibility -->
@@ -900,13 +1713,21 @@ null
 <a id="tocsincomemodelv1"></a>
 
 ```json
-null
+[
+  {
+    "properties": null
+  }
+]
 
 ```
 
+Array of income for one or more applicants
+
 ### Properties
 
-*None*
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|properties|any|false|none|none|
 
 <h2 id="tocS_ExpensesModelV1">ExpensesModelV1</h2>
 <!-- backwards compatibility -->
@@ -916,13 +1737,21 @@ null
 <a id="tocsexpensesmodelv1"></a>
 
 ```json
-null
+[
+  {
+    "properties": null
+  }
+]
 
 ```
 
+Array of expenses for one or more applicants
+
 ### Properties
 
-*None*
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|properties|any|false|none|none|
 
 <h2 id="tocS_AssetsModelV1">AssetsModelV1</h2>
 <!-- backwards compatibility -->
@@ -932,13 +1761,51 @@ null
 <a id="tocsassetsmodelv1"></a>
 
 ```json
-null
+[
+  {
+    "applicantIds": [
+      "string"
+    ],
+    "assets": {
+      "properties": [
+        {
+          "address": "string",
+          "estimatedValue": 0
+        }
+      ],
+      "savings": {
+        "valueHeldHere": 0,
+        "estimatedValue": 0
+      },
+      "other": [
+        {
+          "description": "string",
+          "estimatedValue": 0
+        }
+      ]
+    }
+  }
+]
 
 ```
 
+Array of assets for one or more applicants
+
 ### Properties
 
-*None*
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|applicantIds|[string]|true|none|The IDs of the applicants that these assets are associated with|
+|assets|object|true|none|The assets associated with the specified applicants|
+|» properties|[object]|false|none|Array of properties in this asset set|
+|»» address|string|true|none|Address of the property|
+|»» estimatedValue|number|true|none|Estimated value of the property in AUD|
+|» savings|object|false|none|Cash savings held with bank|
+|»» valueHeldHere|number|true|none|Cash savings held with the bank the application is being submitted to|
+|»» estimatedValue|number|false|none|Cash savings held with other banks|
+|» other|[object]|false|none|Array of other assets|
+|»» description|string|true|none|Description of the asset|
+|»» estimatedValue|number|true|none|Estimated value of the asset in AUD|
 
 <h2 id="tocS_LiabilitiesModelV1">LiabilitiesModelV1</h2>
 <!-- backwards compatibility -->
@@ -948,13 +1815,91 @@ null
 <a id="tocsliabilitiesmodelv1"></a>
 
 ```json
-null
+[
+  {
+    "applicantIds": [
+      "string"
+    ],
+    "liabilities": {
+      "mortgages": {
+        "balanceHere": 0,
+        "balanceElsewhere": 0
+      },
+      "creditCards": {
+        "balanceHere": 0,
+        "balanceElsewhere": 0
+      },
+      "personalLoans": {
+        "balanceHere": 0,
+        "balanceElsewhere": 0
+      },
+      "linesOfCredit": {
+        "balanceHere": 0,
+        "balanceElsewhere": 0
+      },
+      "other": {
+        "balanceHere": 0,
+        "balanceElsewhere": 0
+      }
+    }
+  }
+]
 
 ```
 
+Array of liabilities for one or more applicants
+
 ### Properties
 
-*None*
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|applicantIds|[string]|true|none|The IDs of the applicants that these liabilities are associated with|
+|liabilities|object|true|none|The liabilities associated with the specified applicants|
+|» mortgages|object|false|none|Mortgage balances|
+|»» balanceHere|number|true|none|Liability balance with the bank the application is being submitted to|
+|»» balanceElsewhere|number|true|none|Liability balance held with other banks|
+|» creditCards|object|false|none|Credit card balances|
+|»» balanceHere|number|true|none|Liability balance with the bank the application is being submitted to|
+|»» balanceElsewhere|number|true|none|Liability balance held with other banks|
+|» personalLoans|object|false|none|Personal loan balances|
+|»» balanceHere|number|true|none|Liability balance with the bank the application is being submitted to|
+|»» balanceElsewhere|number|true|none|Liability balance held with other banks|
+|» linesOfCredit|object|false|none|Overdraft or lines of credit balances|
+|»» balanceHere|number|true|none|Liability balance with the bank the application is being submitted to|
+|»» balanceElsewhere|number|true|none|Liability balance held with other banks|
+|» other|object|false|none|Balance of other liabilities|
+|»» balanceHere|number|true|none|Liability balance with the bank the application is being submitted to|
+|»» balanceElsewhere|number|true|none|Liability balance held with other banks|
+
+<h2 id="tocS_PeriodModelV1">PeriodModelV1</h2>
+<!-- backwards compatibility -->
+<a id="schemaperiodmodelv1"></a>
+<a id="schema_PeriodModelV1"></a>
+<a id="tocSperiodmodelv1"></a>
+<a id="tocsperiodmodelv1"></a>
+
+```json
+"WEEKLY"
+
+```
+
+The period for income or expense
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|string|false|none|The period for income or expense|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|*anonymous*|WEEKLY|
+|*anonymous*|FORTIGHTLY|
+|*anonymous*|MONTHLY|
+|*anonymous*|QUARTERLY|
+|*anonymous*|ANNUALLY|
 
 <h2 id="tocS_CdrPayloadModelV1">CdrPayloadModelV1</h2>
 <!-- backwards compatibility -->
