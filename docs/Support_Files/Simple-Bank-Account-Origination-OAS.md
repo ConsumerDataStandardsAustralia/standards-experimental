@@ -190,7 +190,9 @@ Submit an application, on behalf of a consumer, to apply for an account to be or
         "livingArrangements": "OWNER",
         "employment": "FULL_TIME",
         "taxRegistration": {
-          "australia": null,
+          "australia": {
+            "tfn": "string"
+          },
           "otherCountries": [
             {
               "country": "string",
@@ -235,7 +237,9 @@ Submit an application, on behalf of a consumer, to apply for an account to be or
           "livingArrangements": "OWNER",
           "employment": "FULL_TIME",
           "taxRegistration": {
-            "australia": null,
+            "australia": {
+              "tfn": "string"
+            },
             "otherCountries": [
               {
                 "country": "string",
@@ -304,7 +308,15 @@ Submit an application, on behalf of a consumer, to apply for an account to be or
         "applicantIds": [
           "string"
         ],
-        "income": null
+        "income": {
+          "properties": [
+            {
+              "type": "SALARY",
+              "value": null,
+              "period": "WEEKLY"
+            }
+          ]
+        }
       }
     ],
     "expenses": [
@@ -312,7 +324,15 @@ Submit an application, on behalf of a consumer, to apply for an account to be or
         "applicantIds": [
           "string"
         ],
-        "expenses": null
+        "expenses": {
+          "properties": [
+            {
+              "type": "OTHER_ACCOMMODATION",
+              "value": null,
+              "period": "WEEKLY"
+            }
+          ]
+        }
       }
     ],
     "assets": [
@@ -513,7 +533,9 @@ This operation does not require authentication
         "livingArrangements": "OWNER",
         "employment": "FULL_TIME",
         "taxRegistration": {
-          "australia": null,
+          "australia": {
+            "tfn": "string"
+          },
           "otherCountries": [
             {
               "country": "string",
@@ -558,7 +580,9 @@ This operation does not require authentication
           "livingArrangements": "OWNER",
           "employment": "FULL_TIME",
           "taxRegistration": {
-            "australia": null,
+            "australia": {
+              "tfn": "string"
+            },
             "otherCountries": [
               {
                 "country": "string",
@@ -627,7 +651,15 @@ This operation does not require authentication
         "applicantIds": [
           "string"
         ],
-        "income": null
+        "income": {
+          "properties": [
+            {
+              "type": "SALARY",
+              "value": null,
+              "period": "WEEKLY"
+            }
+          ]
+        }
       }
     ],
     "expenses": [
@@ -635,7 +667,15 @@ This operation does not require authentication
         "applicantIds": [
           "string"
         ],
-        "expenses": null
+        "expenses": {
+          "properties": [
+            {
+              "type": "OTHER_ACCOMMODATION",
+              "value": null,
+              "period": "WEEKLY"
+            }
+          ]
+        }
       }
     ],
     "assets": [
@@ -1326,7 +1366,9 @@ Details of the application referrer
     "livingArrangements": "OWNER",
     "employment": "FULL_TIME",
     "taxRegistration": {
-      "australia": null,
+      "australia": {
+        "tfn": "string"
+      },
       "otherCountries": [
         {
           "country": "string",
@@ -1371,7 +1413,9 @@ Details of the application referrer
       "livingArrangements": "OWNER",
       "employment": "FULL_TIME",
       "taxRegistration": {
-        "australia": null,
+        "australia": {
+          "tfn": "string"
+        },
         "otherCountries": [
           {
             "country": "string",
@@ -1437,7 +1481,9 @@ The primary applicant for this application
   "livingArrangements": "OWNER",
   "employment": "FULL_TIME",
   "taxRegistration": {
-    "australia": null,
+    "australia": {
+      "tfn": "string"
+    },
     "otherCountries": [
       {
         "country": "string",
@@ -1518,7 +1564,9 @@ xor
   "livingArrangements": "OWNER",
   "employment": "FULL_TIME",
   "taxRegistration": {
-    "australia": null,
+    "australia": {
+      "tfn": "string"
+    },
     "otherCountries": [
       {
         "country": "string",
@@ -1569,7 +1617,8 @@ A single applicant who is an individual
 |livingArrangements|string|false|none|Living arrangements of the applicant|
 |employment|string|true|none|Employment status of the applicant|
 |taxRegistration|object|true|none|Tax registration of the applicant|
-|» australia|any|false|none|none|
+|» australia|object|false|none|Australian tax registration|
+|»» tfn|string|true|none|Tax file number of the applicant|
 |» otherCountries|[object]|false|none|Array of other countries where the applicant is registered for tax|
 |»» country|string|true|none|Country of tax regisration defined using three character ISO country code|
 |»» tin|string|false|none|Tax identification number for the registration|
@@ -1730,7 +1779,15 @@ The details of the products being applied for
     "applicantIds": [
       "string"
     ],
-    "income": null
+    "income": {
+      "properties": [
+        {
+          "type": "SALARY",
+          "value": null,
+          "period": "WEEKLY"
+        }
+      ]
+    }
   }
 ]
 
@@ -1743,7 +1800,7 @@ Array of income for one or more applicants
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |applicantIds|[string]|true|none|The IDs of the applicants that these income items are associated with|
-|income|objects|true|none|The income associated with the specified applicants|
+|income|object|true|none|The income associated with the specified applicants|
 |» properties|[object]|false|none|Array of income items|
 |»» type|string|true|none|The type of income|
 |»» value|any|false|none|none|
@@ -1781,7 +1838,15 @@ Array of income for one or more applicants
     "applicantIds": [
       "string"
     ],
-    "expenses": null
+    "expenses": {
+      "properties": [
+        {
+          "type": "OTHER_ACCOMMODATION",
+          "value": null,
+          "period": "WEEKLY"
+        }
+      ]
+    }
   }
 ]
 
@@ -1794,7 +1859,7 @@ Array of expenses for one or more applicants
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |applicantIds|[string]|true|none|The IDs of the applicants that these expenses are associated with|
-|expenses|objects|true|none|The expenses associated with the specified applicants|
+|expenses|object|true|none|The expenses associated with the specified applicants|
 |» properties|[object]|false|none|Array of expenses|
 |»» type|string|true|none|The type of expense|
 |»» value|any|false|none|none|

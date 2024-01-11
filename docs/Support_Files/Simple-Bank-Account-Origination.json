@@ -865,9 +865,16 @@
                         "description": "Tax registration of the applicant",
                         "properties": {
                             "australia": {
-                                "tfn": {
-                                    "type": "string",
-                                    "description": "Tax file number of the applicant"
+                                "type": "object",
+                                "description": "Australian tax registration",
+                                "required": [
+                                    "tfn"
+                                ],
+                                "properties": {
+                                    "tfn": {
+                                        "type": "string",
+                                        "description": "Tax file number of the applicant"
+                                    }
                                 }
                             },
                             "otherCountries": {
@@ -1178,7 +1185,7 @@
                             }
                         },
                         "income": {
-                            "type": "objects",
+                            "type": "object",
                             "description": "The income associated with the specified applicants",
                             "properties": {
                                 "properties": {
@@ -1250,7 +1257,7 @@
                             }
                         },
                         "expenses": {
-                            "type": "objects",
+                            "type": "object",
                             "description": "The expenses associated with the specified applicants",
                             "properties": {
                                 "properties": {
