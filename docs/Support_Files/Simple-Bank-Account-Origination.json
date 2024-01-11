@@ -1169,60 +1169,58 @@
                         "income"
                     ],
                     "properties": {
-                        "properties": {
-                            "applicantIds": {
-                                "type": "array",
-                                "description": "The IDs of the applicants that these income items are associated with",
-                                "items": {
-                                    "type": "string",
-                                    "description": "A single applicant ID"
-                                }
-                            },
-                            "income": {
-                                "type": "objects",
-                                "description": "The income associated with the specified applicants",
+                        "applicantIds": {
+                            "type": "array",
+                            "description": "The IDs of the applicants that these income items are associated with",
+                            "items": {
+                                "type": "string",
+                                "description": "A single applicant ID"
+                            }
+                        },
+                        "income": {
+                            "type": "objects",
+                            "description": "The income associated with the specified applicants",
+                            "properties": {
                                 "properties": {
-                                    "properties": {
-                                        "type": "array",
-                                        "description": "Array of income items",
-                                        "items": {
-                                            "type": "object",
-                                            "description": "A single income item",
-                                            "required": [
-                                                "type",
-                                                "estimatedValue",
-                                                "period"
-                                            ],
-                                            "properties": {
-                                                "type": {
-                                                    "type": "string",
-                                                    "description": "The type of income",
-                                                    "enum": [
-                                                        "SALARY",
-                                                        "OVERTIME",
-                                                        "COMMISSION_INCOME",
-                                                        "BONUS_INCOME",
-                                                        "CASUAL_INCOME",
-                                                        "SELF_EMPLOYMENT",
-                                                        "GOV_ALLOWANCE",
-                                                        "CHILD_SUPPORT",
-                                                        "RENTAL_INCOME",
-                                                        "SUPERANNUATION",
-                                                        "ASSET_INCOME",
-                                                        "FOREIGN_INCOME",
-                                                        "DEFENCE_FORCE_INCOME",
-                                                        "OTHER"
-                                                    ]
-                                                },
-                                                "value": {
-                                                    "estimatedValue": {
-                                                        "type": "number",
-                                                        "description": "Estimated value of the income in AUD"
-                                                    }
-                                                },
-                                                "period": {
-                                                    "$ref": "#/components/schemas/PeriodModelV1"
+                                    "type": "array",
+                                    "description": "Array of income items",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "A single income item",
+                                        "required": [
+                                            "type",
+                                            "estimatedValue",
+                                            "period"
+                                        ],
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "description": "The type of income",
+                                                "enum": [
+                                                    "SALARY",
+                                                    "OVERTIME",
+                                                    "COMMISSION_INCOME",
+                                                    "BONUS_INCOME",
+                                                    "CASUAL_INCOME",
+                                                    "SELF_EMPLOYMENT",
+                                                    "GOV_ALLOWANCE",
+                                                    "CHILD_SUPPORT",
+                                                    "RENTAL_INCOME",
+                                                    "SUPERANNUATION",
+                                                    "ASSET_INCOME",
+                                                    "FOREIGN_INCOME",
+                                                    "DEFENCE_FORCE_INCOME",
+                                                    "OTHER"
+                                                ]
+                                            },
+                                            "value": {
+                                                "estimatedValue": {
+                                                    "type": "number",
+                                                    "description": "Estimated value of the income in AUD"
                                                 }
+                                            },
+                                            "period": {
+                                                "$ref": "#/components/schemas/PeriodModelV1"
                                             }
                                         }
                                     }
@@ -1243,62 +1241,60 @@
                         "expenses"
                     ],
                     "properties": {
-                        "properties": {
-                            "applicantIds": {
-                                "type": "array",
-                                "description": "The IDs of the applicants that these expenses are associated with",
-                                "items": {
-                                    "type": "string",
-                                    "description": "A single applicant ID"
-                                }
-                            },
-                            "expenses": {
-                                "type": "objects",
-                                "description": "The expenses associated with the specified applicants",
+                        "applicantIds": {
+                            "type": "array",
+                            "description": "The IDs of the applicants that these expenses are associated with",
+                            "items": {
+                                "type": "string",
+                                "description": "A single applicant ID"
+                            }
+                        },
+                        "expenses": {
+                            "type": "objects",
+                            "description": "The expenses associated with the specified applicants",
+                            "properties": {
                                 "properties": {
-                                    "properties": {
-                                        "type": "array",
-                                        "description": "Array of expenses",
-                                        "items": {
-                                            "type": "object",
-                                            "description": "A single expense",
-                                            "required": [
-                                                "type",
-                                                "estimatedValue",
-                                                "period"
-                                            ],
-                                            "properties": {
-                                                "type": {
-                                                    "type": "string",
-                                                    "description": "The type of expense",
-                                                    "enum": [
-                                                        "OTHER_ACCOMMODATION",
-                                                        "HOUSEHOLD",
-                                                        "UTILITIES",
-                                                        "GROCERIES",
-                                                        "HEALTH",
-                                                        "PERSONAL_INSURANCE",
-                                                        "TRANSPOT_AND_VEHICLES",
-                                                        "TV_AND_COMMS",
-                                                        "PERSONAL",
-                                                        "LIFESTYLE",
-                                                        "CHILDCARE",
-                                                        "PUBLIC_EDUCATION",
-                                                        "PRIVATE_EDUCATION",
-                                                        "FAMILY_MAINTENANCE",
-                                                        "PROFESSIONAL_SERVICES",
-                                                        "OTHER"
-                                                    ]
-                                                },
-                                                "value": {
-                                                    "estimatedValue": {
-                                                        "type": "number",
-                                                        "description": "Estimated value of the expense in AUD"
-                                                    }
-                                                },
-                                                "period": {
-                                                    "$ref": "#/components/schemas/PeriodModelV1"
+                                    "type": "array",
+                                    "description": "Array of expenses",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "A single expense",
+                                        "required": [
+                                            "type",
+                                            "estimatedValue",
+                                            "period"
+                                        ],
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "description": "The type of expense",
+                                                "enum": [
+                                                    "OTHER_ACCOMMODATION",
+                                                    "HOUSEHOLD",
+                                                    "UTILITIES",
+                                                    "GROCERIES",
+                                                    "HEALTH",
+                                                    "PERSONAL_INSURANCE",
+                                                    "TRANSPOT_AND_VEHICLES",
+                                                    "TV_AND_COMMS",
+                                                    "PERSONAL",
+                                                    "LIFESTYLE",
+                                                    "CHILDCARE",
+                                                    "PUBLIC_EDUCATION",
+                                                    "PRIVATE_EDUCATION",
+                                                    "FAMILY_MAINTENANCE",
+                                                    "PROFESSIONAL_SERVICES",
+                                                    "OTHER"
+                                                ]
+                                            },
+                                            "value": {
+                                                "estimatedValue": {
+                                                    "type": "number",
+                                                    "description": "Estimated value of the expense in AUD"
                                                 }
+                                            },
+                                            "period": {
+                                                "$ref": "#/components/schemas/PeriodModelV1"
                                             }
                                         }
                                     }

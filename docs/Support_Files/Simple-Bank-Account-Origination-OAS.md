@@ -301,12 +301,18 @@ Submit an application, on behalf of a consumer, to apply for an account to be or
     ],
     "income": [
       {
-        "properties": null
+        "applicantIds": [
+          "string"
+        ],
+        "income": null
       }
     ],
     "expenses": [
       {
-        "properties": null
+        "applicantIds": [
+          "string"
+        ],
+        "expenses": null
       }
     ],
     "assets": [
@@ -618,12 +624,18 @@ This operation does not require authentication
     ],
     "income": [
       {
-        "properties": null
+        "applicantIds": [
+          "string"
+        ],
+        "income": null
       }
     ],
     "expenses": [
       {
-        "properties": null
+        "applicantIds": [
+          "string"
+        ],
+        "expenses": null
       }
     ],
     "assets": [
@@ -1715,7 +1727,10 @@ The details of the products being applied for
 ```json
 [
   {
-    "properties": null
+    "applicantIds": [
+      "string"
+    ],
+    "income": null
   }
 ]
 
@@ -1727,7 +1742,31 @@ Array of income for one or more applicants
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|properties|any|false|none|none|
+|applicantIds|[string]|true|none|The IDs of the applicants that these income items are associated with|
+|income|objects|true|none|The income associated with the specified applicants|
+|» properties|[object]|false|none|Array of income items|
+|»» type|string|true|none|The type of income|
+|»» value|any|false|none|none|
+|»» period|[PeriodModelV1](#schemaperiodmodelv1)|true|none|The period for income or expense|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|SALARY|
+|type|OVERTIME|
+|type|COMMISSION_INCOME|
+|type|BONUS_INCOME|
+|type|CASUAL_INCOME|
+|type|SELF_EMPLOYMENT|
+|type|GOV_ALLOWANCE|
+|type|CHILD_SUPPORT|
+|type|RENTAL_INCOME|
+|type|SUPERANNUATION|
+|type|ASSET_INCOME|
+|type|FOREIGN_INCOME|
+|type|DEFENCE_FORCE_INCOME|
+|type|OTHER|
 
 <h2 id="tocS_ExpensesModelV1">ExpensesModelV1</h2>
 <!-- backwards compatibility -->
@@ -1739,7 +1778,10 @@ Array of income for one or more applicants
 ```json
 [
   {
-    "properties": null
+    "applicantIds": [
+      "string"
+    ],
+    "expenses": null
   }
 ]
 
@@ -1751,7 +1793,33 @@ Array of expenses for one or more applicants
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|properties|any|false|none|none|
+|applicantIds|[string]|true|none|The IDs of the applicants that these expenses are associated with|
+|expenses|objects|true|none|The expenses associated with the specified applicants|
+|» properties|[object]|false|none|Array of expenses|
+|»» type|string|true|none|The type of expense|
+|»» value|any|false|none|none|
+|»» period|[PeriodModelV1](#schemaperiodmodelv1)|true|none|The period for income or expense|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|OTHER_ACCOMMODATION|
+|type|HOUSEHOLD|
+|type|UTILITIES|
+|type|GROCERIES|
+|type|HEALTH|
+|type|PERSONAL_INSURANCE|
+|type|TRANSPOT_AND_VEHICLES|
+|type|TV_AND_COMMS|
+|type|PERSONAL|
+|type|LIFESTYLE|
+|type|CHILDCARE|
+|type|PUBLIC_EDUCATION|
+|type|PRIVATE_EDUCATION|
+|type|FAMILY_MAINTENANCE|
+|type|PROFESSIONAL_SERVICES|
+|type|OTHER|
 
 <h2 id="tocS_AssetsModelV1">AssetsModelV1</h2>
 <!-- backwards compatibility -->
