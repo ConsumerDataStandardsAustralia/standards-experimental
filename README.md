@@ -22,9 +22,18 @@ Note that the conversion of OpenAPI Specification files to markdown is recommend
 
 `widdershins --environment env.json input_oas.json -o output_markdown.md`
 
+If you would like to suggest a change request to any existing Experimental Standards, you can raise a [Standards Experimental backlog item](https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues/new/choose).  
+
+
 ## The Consumer Data Standards
 
-These standards are not the binding standards created for the Consumer Data Right.  The binding standards can be found in the [main consumer data standards repository](https://github.com/ConsumerDataStandardsAustralia/standards/issues).
+These standards are not the binding standards created for the Consumer Data Right.  The binding standards can be found in the [main consumer data standards repository](https://github.com/ConsumerDataStandardsAustralia/standards/issues). The DSB manages a formal change process for making changes to the binding Data Stnadards in the [Standards Maintenance](https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues) repository.
+
+
+## Suggesting New Experiment Propositions
+
+If you would like to propose a new experiment proposition for consideration you can raise an issue on [this repository](https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues) by opening a new ["Standards Experiment Proposition" issue](https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues/new/choose). 
+
 
 ## Rules of engagement for this repository
 
