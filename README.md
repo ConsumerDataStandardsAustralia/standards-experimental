@@ -8,6 +8,11 @@ These standards are experimental.  This means that they are unstable and are exp
 
 If an experimental standard is seen to be valid and useful it will be decommissioned and reformatted as a draft standard on the [main consumer data standards repository](https://github.com/ConsumerDataStandardsAustralia/standards/issues).
 
+## Suggesting New Experiment Propositions
+
+If you would like to propose a new experiment proposition for consideration you can raise an issue on [this repository](https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues) by opening a new ["Standards Experiment Proposition" issue](https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues/new/choose). 
+
+
 ## Viewing The Experimental Standards
 
 The experimental standards are [published here](https://consumerdatastandardsaustralia.github.io/standards-experimental/).
@@ -28,11 +33,6 @@ If you would like to suggest a change request to any existing Experimental Stand
 ## The Consumer Data Standards
 
 These standards are not the binding standards created for the Consumer Data Right.  The binding standards can be found in the [main consumer data standards repository](https://github.com/ConsumerDataStandardsAustralia/standards/issues). The DSB manages a formal change process for making changes to the binding Data Stnadards in the [Standards Maintenance](https://github.com/ConsumerDataStandardsAustralia/standards-maintenance/issues) repository.
-
-
-## Suggesting New Experiment Propositions
-
-If you would like to propose a new experiment proposition for consideration you can raise an issue on [this repository](https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues) by opening a new ["Standards Experiment Proposition" issue](https://github.com/ConsumerDataStandardsAustralia/standards-experimental/issues/new/choose). 
 
 
 ## Rules of engagement for this repository
