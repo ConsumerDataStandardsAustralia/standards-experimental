@@ -7,6 +7,19 @@ assignees: ''
 
 ---
 
+# Context / Problem Space
+
+Describe the context and purpose of this expeirment. 
+
+- _You can also describe the opportunities this experiment might consider, or may unlock._
+- _You can also include any evidence or data that quantifies the problem, the opportunity or further supports the identified use cases ad hypothesis._
+
+# Use Cases
+
+What are the primary use cases this proposition seeks to support?
+
+_These are typically consumer-facing uses cases but depending on the hypothesis to test, they may be more technical in nature or consider enabling use cases._
+
 # Hypothesis
 
 What is the experiment hypothesis to be tested?
