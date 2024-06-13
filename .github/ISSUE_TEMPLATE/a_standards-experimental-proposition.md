@@ -9,7 +9,7 @@ assignees: ''
 
 # Context / Problem Space
 
-Describe the context and purpose of this expeirment. 
+Describe the context and purpose of this experiment. 
 
 - _You can also describe the opportunities this experiment might consider, or may unlock._
 - _You can also include any evidence or data that quantifies the problem, the opportunity or further supports the identified use cases ad hypothesis._
