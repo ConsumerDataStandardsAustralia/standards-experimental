@@ -56,3 +56,10 @@ Product API's proposal for Superannuation retail products
 *Current Version:* 0.0.1<br/>
 *Description:*<br/>
 Product API's proposal for Home Insurance products
+
+# 
+
+*Standard:* [Authentication Uplift](./Standards/Authentication-Uplift.html)<br/>
+*Current Version:* 0.0.2<br/>
+*Description:*<br/>
+Uplift to authentication standards. This specification proposes Strong Customer Authentication, Redirect To App and Decoupled Authentication standards.
